@@ -5,7 +5,13 @@ import edu.rit.CSCI652.demo.Publisher;
 import edu.rit.CSCI652.demo.Subscriber;
 import edu.rit.CSCI652.demo.Topic;
 
-public class PubSubAgent implements Publisher, Subscriber{
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.net.Socket;
+
+public class PubSubAgent implements Publisher, Subscriber, Serializable{
 
 	@Override
 	public void subscribe(Topic topic) {
@@ -44,9 +50,13 @@ public class PubSubAgent implements Publisher, Subscriber{
 	}
 
 	@Override
-	public void advertise(Topic newTopic) {
+	public void advertise(Topic newTopic) throws IOException {
 		// TODO Auto-generated method stub
-		
+		Socket advertiserSocket = new Socket("localhost", 9000);
+        DataOutputStream out    = new DataOutputStream(advertiserSocket.getOutputStream());
+        out.writeUTF("Advertise");
+        ObjectOutputStream outObject = new ObjectOutputStream(advertiserSocket.getOutputStream());
+        outObject.writeObject(newTopic);
 	}
 
 
