@@ -40,23 +40,28 @@ public class PubSubAgent implements Publisher, Subscriber, Serializable{
 	@Override
 	public void listSubscribedTopics() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public void publish(Event event) {
+	public void publish(Event event) throws IOException {
 		// TODO Auto-generated method stub
-		
-	}
+        Socket publishSocket = new Socket("localhost", 2000);
+        DataOutputStream out    = new DataOutputStream(publishSocket.getOutputStream());
+        out.writeUTF("Publish");
+        ObjectOutputStream outObject = new ObjectOutputStream(publishSocket.getOutputStream());
+        outObject.writeObject(event);
+    }
 
 	@Override
 	public void advertise(Topic newTopic) throws IOException {
 		// TODO Auto-generated method stub
-		Socket advertiserSocket = new Socket("localhost", 9000);
+		Socket advertiserSocket = new Socket("localhost", 2000);
         DataOutputStream out    = new DataOutputStream(advertiserSocket.getOutputStream());
         out.writeUTF("Advertise");
+        out.flush();
         ObjectOutputStream outObject = new ObjectOutputStream(advertiserSocket.getOutputStream());
         outObject.writeObject(newTopic);
+        outObject.flush();
 	}
 
 

@@ -8,7 +8,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 
 public class EventManager implements Serializable{
@@ -17,26 +17,29 @@ public class EventManager implements Serializable{
 	private static List<Socket> socketList = null;
 	private static DataInputStream inStream = null;
 	private static ObjectInputStream objectInStream = null;
-	private static HashSet<Topic> topicSet = null;
+	public static HashMap<Integer, Topic> topicMap =  new HashMap<Integer, Topic>();;
+    public static HashMap<Integer, Event> eventMap = new HashMap<>();
 
 
     /*
 	 * Start the repo service
 	 */
 	private void startService() throws IOException, ClassNotFoundException {
-		eventManagerSocket = new ServerSocket(9000);
+		eventManagerSocket = new ServerSocket(2000);
 		System.out.println("Event Manager started");
+        System.out.println();
         socketList = new ArrayList<>();
-        topicSet = new HashSet<>();
-
 		while (true){
             Socket socket = eventManagerSocket.accept();
             socketList.add(socket);
-            inStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-            if(inStream.readUTF().equals("Advertise")){
-                objectInStream = new ObjectInputStream(socket.getInputStream());
-                Topic topic = (Topic) objectInStream.readObject();
-                addTopic(topic);
+            DataInputStream inStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            String input = inStream.readUTF();
+            if(input.equals("Advertise")){
+                System.out.println("Advertising a topic");
+                new EventManagerAdvertise(socket).start();
+            }else if(input.equals("Publish")){
+                System.out.println("Publishing an article");
+                new EventManagerPublish(socket).start();
             }
         }
 	}
@@ -51,16 +54,12 @@ public class EventManager implements Serializable{
 	/*
 	 * add new topic when received advertisement of new topic
 	 */
-	private void addTopic(Topic topic) throws IOException {
+	public void addTopic(Topic topic) throws IOException {
+        topicMap.put( topic.id, topic);
+        System.out.println("Topic - " + "'" + topic.name + "'" + " added");
+        System.out.println();
+    }
 
-        if(topicSet.add(topic)){
-            System.out.println("New topic added");
-        }else {
-            System.out.println("Topic already exist");
-        }
-
-	}
-	
 	/*
 	 * add subscriber to the internal list
 	 */
