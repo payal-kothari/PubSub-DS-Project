@@ -2,7 +2,6 @@ package edu.rit.CSCI652.impl;
 
 
 import edu.rit.CSCI652.demo.Event;
-import edu.rit.CSCI652.demo.Subscriber;
 import edu.rit.CSCI652.demo.Topic;
 
 import java.io.*;
