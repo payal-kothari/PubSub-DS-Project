@@ -24,7 +24,6 @@ public class PublisherNode {
     private static void init() throws IOException {
         Scanner scanner = new Scanner(System.in);
         while (true){
-
             System.out.println("Choose an option : ");
             System.out.println("1. Advertise a topic");
             System.out.println("2. Publish an article");

@@ -2,19 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8c8d5640-3fa8-4ec3-a438-96d318ca6205" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerAdvertise.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerPublish.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/demo/Event.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/demo/Event.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/demo/Publisher.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/demo/Publisher.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerAdvertise.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerPublish.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/demo/PublisherNode.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/demo/PublisherNode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/demo/Topic.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/demo/Topic.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/EventManager.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/EventManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/EventManagerAdvertise.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/EventManagerAdvertise.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/PubSubAgent.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/PubSubAgent.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Event.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Event.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Publisher.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Publisher.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/PublisherNode.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/PublisherNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Topic.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Topic.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java" />
     </list>
@@ -35,8 +31,8 @@
       <file leaf-file-name="EventManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="47" column="43" lean-forward="true" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
+            <state relative-caret-position="315">
+              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -44,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventManagerAdvertise.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerAdvertise.java">
+      <file leaf-file-name="ThreadHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="28" column="62" lean-forward="false" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
+            <state relative-caret-position="156">
+              <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,33 +55,9 @@
       <file leaf-file-name="PubSubAgent.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="56" column="42" lean-forward="false" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
+            <state relative-caret-position="230">
+              <caret line="57" column="64" lean-forward="false" selection-start-line="57" selection-start-column="64" selection-end-line="57" selection-end-column="64" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EventManagerPublish.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerPublish.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="29" column="31" lean-forward="false" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Event.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Event.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="10" lean-forward="false" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -93,11 +65,10 @@
       <file leaf-file-name="PublisherNode.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/demo/PublisherNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="37" column="52" lean-forward="true" selection-start-line="37" selection-start-column="52" selection-end-line="37" selection-end-column="52" />
+            <state relative-caret-position="905">
+              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#456#472#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,12 +103,13 @@
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Publisher.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/EventManagerServer.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerServer.java" />
-        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/PublisherNode.java" />
-        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java" />
-        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerAdvertise.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Event.java" />
-        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java" />
+        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/PublisherNode.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerPublish.java" />
+        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerAdvertise.java" />
+        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java" />
+        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java" />
+        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java" />
       </list>
     </option>
   </component>
@@ -162,7 +134,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -318,14 +290,14 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager" selected="Application.PublisherNode">
@@ -599,7 +571,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -616,7 +588,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23182553" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23505655" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -697,7 +669,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerAdvertise.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="38" column="28" lean-forward="true" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
@@ -731,7 +703,6 @@
           <caret line="27" column="55" lean-forward="true" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#456#472#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -756,7 +727,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerAdvertise.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="35" column="66" lean-forward="false" selection-start-line="35" selection-start-column="66" selection-end-line="35" selection-end-column="66" />
@@ -790,7 +761,6 @@
           <caret line="47" column="89" lean-forward="true" selection-start-line="47" selection-start-column="89" selection-end-line="47" selection-end-column="89" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#456#472#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -846,7 +816,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#456#472#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -902,7 +871,6 @@
           <caret line="30" column="53" lean-forward="true" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#456#472#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -958,7 +926,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#456#472#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1007,7 +974,6 @@
           <caret line="35" column="55" lean-forward="true" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#456#472#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1105,49 +1071,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerPublish.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="56" column="42" lean-forward="false" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
+        <state relative-caret-position="179">
+          <caret line="20" column="5" lean-forward="false" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerAdvertise.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="28" column="62" lean-forward="false" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
+        <state relative-caret-position="156">
+          <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerPublish.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="29" column="31" lean-forward="false" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="230">
+          <caret line="57" column="64" lean-forward="false" selection-start-line="57" selection-start-column="64" selection-end-line="57" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/demo/PublisherNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="37" column="52" lean-forward="true" selection-start-line="37" selection-start-column="52" selection-end-line="37" selection-end-column="52" />
+        <state relative-caret-position="905">
+          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#456#472#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="47" column="43" lean-forward="true" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
+        <state relative-caret-position="315">
+          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

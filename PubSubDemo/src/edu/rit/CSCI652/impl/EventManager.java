@@ -20,7 +20,6 @@ public class EventManager implements Serializable{
 	public static HashMap<Integer, Topic> topicMap =  new HashMap<Integer, Topic>();;
     public static HashMap<Integer, Event> eventMap = new HashMap<>();
 
-
     /*
 	 * Start the repo service
 	 */
@@ -32,15 +31,7 @@ public class EventManager implements Serializable{
 		while (true){
             Socket socket = eventManagerSocket.accept();
             socketList.add(socket);
-            DataInputStream inStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-            String input = inStream.readUTF();
-            if(input.equals("Advertise")){
-                System.out.println("Advertising a topic");
-                new EventManagerAdvertise(socket).start();
-            }else if(input.equals("Publish")){
-                System.out.println("Publishing an article");
-                new EventManagerPublish(socket).start();
-            }
+            new ThreadHandler(socket).start();
         }
 	}
 
