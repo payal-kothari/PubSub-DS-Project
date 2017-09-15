@@ -43,10 +43,14 @@ public class PubSubAgent implements Publisher, Subscriber, Serializable{
 	public void publish(Event event) throws IOException {
 		// TODO Auto-generated method stub
         Socket publishSocket = new Socket("localhost", 2000);
-        DataOutputStream out = new DataOutputStream(publishSocket.getOutputStream());
-        out.writeUTF("Publish");
-        ObjectOutputStream outObject = new ObjectOutputStream(publishSocket.getOutputStream());
+        ObjectInputStream objectInStream = new ObjectInputStream(publishSocket.getInputStream());
+        int reconnectPort = objectInStream.readInt();
+        Socket reconnectSocket = new Socket("localhost", reconnectPort);
+        System.out.println("Reconnected on port : " + reconnectSocket.getPort()); // gives remote m/c's port
+        ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
+        outObject.writeUTF("Publish");
         outObject.writeObject(event);
+        outObject.flush();
     }
 
 	@Override

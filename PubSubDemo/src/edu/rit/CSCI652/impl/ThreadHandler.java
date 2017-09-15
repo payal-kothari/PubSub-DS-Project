@@ -34,10 +34,10 @@ public class ThreadHandler extends Thread {
                 Topic topic = (Topic) objectInStream.readObject();
                 em.addTopic(topic);
             }else if(input.equals("Publish")){
-                objectInStream = new ObjectInputStream(socket.getInputStream());
+                System.out.println("Publishing an article");
                 Event article = (Event) objectInStream.readObject();                // event = article
-                em.eventMap.put(article.id, article);
-                System.out.println("Article" +  "'" + article.title +"'"+ " added under topic name - " + "'" + article.topic.name + "'");
+                EventManager.eventMap.put(article.id, article);
+                System.out.println("Article " +  "'" + article.title +"'"+ " added under topic name - " + "'" + article.topic.name + "'");
             }
         }catch (IOException e){
 

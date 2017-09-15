@@ -38,7 +38,7 @@ public class EventManager implements Serializable {
 		while (true){
 			// Server can accepts connections from two different clients at the same time on the same port but
 			// both clients can not talk at the same time on that same port. So, connect two different clients
-			// on different ports of the server.
+			// on different ports of the server to make the system scalable.
 
             // randomize the ports for security .. ex. hashing
             int nextFreePort = getNewFreePort();
