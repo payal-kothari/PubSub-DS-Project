@@ -17,10 +17,12 @@ public class ThreadHandler extends Thread {
     static Socket socket;
     static EventManager em = null;
     public static ObjectInputStream objectInStream = null;
+    private static int currentPort;
 
-    public ThreadHandler(Socket socket) {
+    public ThreadHandler(Socket socket, int port) {
         this.em = new EventManager();
         this.socket = socket;
+        this.currentPort = port;
     }
 
     public void run() {
@@ -36,16 +38,23 @@ public class ThreadHandler extends Thread {
                 Event article = (Event) objectInStream.readObject();                // event = article
                 em.eventMap.put(article.id, article);
                 System.out.println("Article" +  "'" + article.title +"'"+ " added under topic name - " + "'" + article.topic.name + "'");
-                System.out.println();
             }
-
-           // objectInStream.close();
         }catch (IOException e){
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
+        finally {
+            try {
+                socket.close();
+                System.out.println("Connection on " + socket.getLocalPort() + " closed : " + socket.isClosed()  );
+                System.out.println();
+                EventManager.busyPorts.remove(currentPort);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

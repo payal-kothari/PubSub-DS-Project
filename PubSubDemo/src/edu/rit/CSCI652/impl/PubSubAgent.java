@@ -5,10 +5,7 @@ import edu.rit.CSCI652.demo.Publisher;
 import edu.rit.CSCI652.demo.Subscriber;
 import edu.rit.CSCI652.demo.Topic;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.net.Socket;
 
 public class PubSubAgent implements Publisher, Subscriber, Serializable{
@@ -56,11 +53,15 @@ public class PubSubAgent implements Publisher, Subscriber, Serializable{
 	public void advertise(Topic newTopic) throws IOException {
 		// TODO Auto-generated method stub
 		Socket advertiserSocket = new Socket("localhost", 2000);
-        ObjectOutputStream outObject = new ObjectOutputStream(advertiserSocket.getOutputStream());
+        ObjectInputStream objectInStream = new ObjectInputStream(advertiserSocket.getInputStream());
+        int reconnectPort = objectInStream.readInt();
+        Socket reconnectSocket = new Socket("localhost", reconnectPort);
+        System.out.println("Reconnected on port : " + reconnectSocket.getPort()); // gives remote m/c's port
+        ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
         outObject.writeUTF("Advertise");
         outObject.writeObject(newTopic);
         outObject.flush();
-	}
+    }
 
 
 	

@@ -11,5 +11,5 @@ public interface Publisher {
 	/*
 	 * advertise new topic
 	 */
-	public void advertise(Topic newTopic) throws IOException;
+	public void advertise(Topic newTopic) throws IOException, ClassNotFoundException;
 }
