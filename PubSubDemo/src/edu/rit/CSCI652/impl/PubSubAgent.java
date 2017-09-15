@@ -57,15 +57,17 @@ public class PubSubAgent implements Publisher, Subscriber, Serializable{
 	public void advertise(Topic newTopic) throws IOException {
 		// TODO Auto-generated method stub
 		Socket advertiserSocket = new Socket("localhost", 2000);
+        System.out.println("\nConnection request sent on public port  2000");
         ObjectInputStream objectInStream = new ObjectInputStream(advertiserSocket.getInputStream());
         int reconnectPort = objectInStream.readInt();
         Socket reconnectSocket = new Socket("localhost", reconnectPort);
-        System.out.println("Reconnected on port : " + reconnectSocket.getPort()); // gives remote m/c's port
+        System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
         ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
         outObject.writeUTF("Advertise");
         outObject.writeObject(newTopic);
         outObject.flush();
-    }
+		System.out.println("Topic successfully advetised");
+	}
 
 
 	

@@ -1,9 +1,10 @@
-package edu.rit.CSCI652.demo;
+package edu.rit.CSCI652.impl;
 
+import edu.rit.CSCI652.demo.Event;
+import edu.rit.CSCI652.demo.Topic;
 import edu.rit.CSCI652.impl.PubSubAgent;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.util.*;
 
 /**
@@ -15,7 +16,7 @@ public class PublisherNode {
     private static int eventId = 0;
     private static List<String> keywords = null;
     private static String topicName = null;
-    public static HashMap<Integer, Topic> allTopicsMap =  new HashMap<Integer, Topic>();;
+    public static HashMap<Integer, Topic> allTopicsMap =  new HashMap<Integer, Topic>();
 
     public static void main(String[] args) throws IOException {
         init();
@@ -25,11 +26,11 @@ public class PublisherNode {
         Scanner scanner = new Scanner(System.in);
         while (true){
             System.out.println();
-            System.out.println("Choose an option : ");
+            System.out.println("***** Choose an option : ");
             System.out.println("1. Advertise a topic");
             System.out.println("2. Publish an article");
             int option = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine();                 // need this after reading nextInt()
             if(option == 1 ){                 // Advertising a new topic
                 topicId++;
                 keywords = new ArrayList<>();

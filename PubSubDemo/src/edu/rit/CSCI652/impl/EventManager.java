@@ -20,11 +20,11 @@ public class EventManager implements Serializable {
 
 	private static ServerSocket eventManagerSocket = null;
 	private static List<Socket> socketList = null;
-	private static DataInputStream inStream = null;
-	private static ObjectInputStream objectInStream = null;
-	public static HashMap<Integer, Topic> topicMap =  new HashMap<Integer, Topic>();
+	public static HashMap<Integer, Topic> topicMap =  new HashMap<>();
+	public static List<Topic> topicList= new ArrayList<>();
     public static HashMap<Integer, Event> eventMap = new HashMap<>();
     public static HashSet<Integer> busyPorts = new HashSet<>();
+    public static HashMap<Topic, List<SubscriberDetails>> subscriberMap = new HashMap<>();
 
     /*
 	 * Start the repo service
@@ -32,8 +32,7 @@ public class EventManager implements Serializable {
 	private void startService() throws IOException, ClassNotFoundException {
 		eventManagerSocket = new ServerSocket(2000);
 		busyPorts.add(2000);
-		System.out.println("Event Manager started");
-        System.out.println();
+		System.out.println("Event Manager started\n");
         socketList = new ArrayList<>();
 		while (true){
 			// Server can accepts connections from two different clients at the same time on the same port but
@@ -45,13 +44,13 @@ public class EventManager implements Serializable {
             busyPorts.add(nextFreePort);
             ServerSocket subServerSocket = new ServerSocket(nextFreePort);
             Socket socket = eventManagerSocket.accept();
-            System.out.println("Connection established on public port: " + socket.getLocalPort());
+            System.out.println("Connection established on public port : " + socket.getLocalPort());
             ObjectOutputStream outObject = new ObjectOutputStream(socket.getOutputStream());
             outObject.writeInt(nextFreePort);
             outObject.flush();
             System.out.println("Reconnect port sent " + nextFreePort);
             Socket subSocket = subServerSocket.accept();
-            System.out.println("Reconnected on port no. : " + subSocket.getLocalPort());
+            System.out.println("Reconnected on port " + subSocket.getLocalPort());
           //  socketList.add(subSocket);    // no need
             new ThreadHandler(subSocket, nextFreePort).start();
         }
@@ -69,14 +68,18 @@ public class EventManager implements Serializable {
 	 */
 	public void addTopic(Topic topic) throws IOException {
         topicMap.put( topic.id, topic);
+        topicList.add(topic);
+        if(!subscriberMap.containsKey(topic)){
+            subscriberMap.put(topic, new ArrayList<SubscriberDetails>());
+        }
         System.out.println("Topic - " + "'" + topic.name + "'" + " added");
     }
 
 	/*
 	 * add subscriber to the internal list
 	 */
-	private void addSubscriber(){
-		
+	private void addSubscriber(){               // done
+
 	}
 	
 	/*
