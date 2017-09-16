@@ -2,7 +2,6 @@ package edu.rit.CSCI652.impl;
 
 import edu.rit.CSCI652.demo.Event;
 import edu.rit.CSCI652.demo.Topic;
-import edu.rit.CSCI652.impl.PubSubAgent;
 
 import java.io.IOException;
 import java.util.*;
@@ -16,7 +15,8 @@ public class PublisherNode {
     private static int eventId = 0;
     private static List<String> keywords = null;
     private static String topicName = null;
-    public static HashMap<Integer, Topic> allTopicsMap =  new HashMap<Integer, Topic>();
+    private static HashMap<Integer, Topic> allTopicsMap =  new HashMap<Integer, Topic>();
+
 
     public static void main(String[] args) throws IOException {
         init();
@@ -51,7 +51,7 @@ public class PublisherNode {
                 if(allTopicsMap != null && !allTopicsMap.isEmpty()){
                     System.out.println("***********   Topic names   ***********");
                     for(Map.Entry<Integer, Topic> entry : allTopicsMap.entrySet()){
-                        System.out.println(entry.getKey() + " " + entry.getValue().name);
+                        System.out.println(entry.getKey() + " " + entry.getValue().getName());
 
                     }
                     System.out.println("Please select one option from the above list: ");
@@ -73,7 +73,7 @@ public class PublisherNode {
 
     private static void createNewTopicAndAdvertise() throws IOException {
         Topic topic = new Topic(topicId, keywords, topicName);
-        allTopicsMap.put(topic.id, topic);
+        allTopicsMap.put(topic.getId(), topic);
         new PubSubAgent().advertise(topic);
     }
 }

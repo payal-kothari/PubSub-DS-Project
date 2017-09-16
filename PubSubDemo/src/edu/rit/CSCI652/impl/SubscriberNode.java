@@ -1,6 +1,6 @@
 package edu.rit.CSCI652.impl;
 
-import edu.rit.CSCI652.demo.Event;
+import edu.rit.CSCI652.demo.Subscriber;
 import edu.rit.CSCI652.demo.Topic;
 
 import java.io.IOException;
@@ -8,14 +8,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by payalkothari on 9/15/17.
  */
-public class SubscriberNode implements Serializable {
+public class SubscriberNode implements Subscriber, Serializable {
 
-    public static List<String> subscribedTopics = new ArrayList<>();
+    private static List<String> subscribedTopics = new ArrayList<>();
 
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -55,10 +58,10 @@ public class SubscriberNode implements Serializable {
                 System.out.println("   **********  Topic list  **********  ");
                 while (iter.hasNext()){
                     Topic t = (Topic) iter.next();
-                    if(!subscribedTopics.isEmpty() && !subscribedTopics.contains(t.name)){
-                        System.out.println(t.id + ". "+ t.name);
+                    if(!subscribedTopics.isEmpty() && !subscribedTopics.contains(t.getName())){
+                        System.out.println(t.getId() + ". "+ t.getName());
                     }else if(subscribedTopics.isEmpty()){
-                        System.out.println(t.id + ". "+ t.name);
+                        System.out.println(t.getId() + ". "+ t.getName());
                     }
                 }
 
@@ -73,8 +76,8 @@ public class SubscriberNode implements Serializable {
                     Iterator iter2 = topicList.iterator();
                     while (iter2.hasNext()){
                         Topic t = (Topic) iter2.next();
-                        if(t.id == topicId){
-                            subscribedTopics.add(t.name);
+                        if(t.getId() == topicId){
+                            subscribedTopics.add(t.getName());
                         }
                     }
                 }else{
@@ -170,5 +173,30 @@ public class SubscriberNode implements Serializable {
 
             }
         }
+    }
+
+    @Override
+    public void subscribe(Topic topic) {
+
+    }
+
+    @Override
+    public void subscribe(String keyword) {
+
+    }
+
+    @Override
+    public void unsubscribe(Topic topic) {
+
+    }
+
+    @Override
+    public void unsubscribe() {
+
+    }
+
+    @Override
+    public void listSubscribedTopics() {
+
     }
 }

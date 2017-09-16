@@ -3,7 +3,10 @@ package edu.rit.CSCI652.impl;
 
 import edu.rit.CSCI652.demo.Event;
 import edu.rit.CSCI652.demo.Topic;
-import java.io.*;
+
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
@@ -20,11 +23,29 @@ public class EventManager implements Serializable {
 
 	private static ServerSocket eventManagerSocket = null;
 	private static List<Socket> socketList = null;
-	public static HashMap<Integer, Topic> topicMap =  new HashMap<>();
-	public static List<Topic> topicList= new ArrayList<>();
-    public static HashMap<Integer, Event> eventMap = new HashMap<>();
-    public static HashSet<Integer> busyPorts = new HashSet<>();
-    public static HashMap<Topic, List<SubscriberDetails>> subscriberMap = new HashMap<>();
+    private static HashMap<Integer, Topic> topicMap =  new HashMap<>();
+    private static List<Topic> topicList= new ArrayList<>();
+    private static HashMap<Integer, Event> eventMap = new HashMap<>();
+    private static HashSet<Integer> busyPorts = new HashSet<>();
+    private static HashMap<Topic, List<SubscriberDetails>> subscriberMap = new HashMap<>();
+
+
+    public static List<Topic> getTopicList() {
+        return topicList;
+    }
+
+    public static HashMap<Integer, Event> getEventMap() {
+        return eventMap;
+    }
+
+    public static HashSet<Integer> getBusyPorts() {
+        return busyPorts;
+    }
+
+    public static HashMap<Topic, List<SubscriberDetails>> getSubscriberMap() {
+        return subscriberMap;
+    }
+
 
     /*
 	 * Start the repo service
@@ -67,12 +88,12 @@ public class EventManager implements Serializable {
 	 * add new topic when received advertisement of new topic
 	 */
 	public void addTopic(Topic topic) throws IOException {
-        topicMap.put( topic.id, topic);
+        topicMap.put( topic.getId(), topic);
         topicList.add(topic);
         if(!subscriberMap.containsKey(topic)){
             subscriberMap.put(topic, new ArrayList<SubscriberDetails>());
         }
-        System.out.println("Topic - " + "'" + topic.name + "'" + " added");
+        System.out.println("Topic - " + "'" + topic.getName() + "'" + " added");
     }
 
 	/*

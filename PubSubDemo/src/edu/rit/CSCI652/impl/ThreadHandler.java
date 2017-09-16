@@ -19,9 +19,8 @@ import java.util.List;
 
 public class ThreadHandler extends Thread implements Serializable{
 
-    static Socket socket;
-    static EventManager em = null;
-    public static ObjectInputStream objectInStream = null;
+    private static Socket socket;
+    private static EventManager em = null;
     private static int currentPort;
 
     public ThreadHandler(Socket socket, int port) {
@@ -43,18 +42,18 @@ public class ThreadHandler extends Thread implements Serializable{
             }else if(input.equals("Publish")){
                 System.out.println("Publishing an article");
                 Event article = (Event) objectInStream.readObject();                // event = article
-                EventManager.eventMap.put(article.id, article);
-                System.out.println("Article " +  "'" + article.title +"'"+ " added under topic name - " + "'" + article.topic.name + "'");
+                EventManager.getEventMap().put(article.getId(), article);
+                System.out.println("Article " +  "'" + article.getTitle() +"'"+ " added under topic name - " + "'" + article.getTopic().getName() + "'");
             }else if(input.equals("Subscriber")){
                 ObjectOutputStream outObject = new ObjectOutputStream(socket.getOutputStream());
-                outObject.writeObject(EventManager.topicList);
+                outObject.writeObject(EventManager.getTopicList());
                 outObject.flush();
                 System.out.println("Topic list sent");
 
                 int topicIdToSubscribe = objectInStream.read();
-                System.out.println("Subscribe to topic - '" + EventManager.topicList.get(--topicIdToSubscribe).name + "'");
+                System.out.println("Subscribe to topic - '" + EventManager.getTopicList().get(--topicIdToSubscribe).getName() + "'");
                 SubscriberDetails subscriber = new SubscriberDetails(socket.getInetAddress(), 8000);  // 8000 for all subscribers
-                List subscriberList = EventManager.subscriberMap.get(EventManager.topicList.get(topicIdToSubscribe));
+                List subscriberList = EventManager.getSubscriberMap().get(EventManager.getTopicList().get(topicIdToSubscribe));
                 subscriberList.add(subscriber);
                // EventManager.subscriberMap.put(EventManager.topicList.get(topicIdToSubscribe), list);
                 System.out.println("Subscriber added");
@@ -65,14 +64,14 @@ public class ThreadHandler extends Thread implements Serializable{
                 String keyword = objectInStream.readUTF();
                 System.out.println("in the block");
                 SubscriberDetails subscriber = new SubscriberDetails(socket.getInetAddress(), 8000);  // 8000 for all subscribers
-                for(Topic topic : EventManager.subscriberMap.keySet()){
-                    List<String> keywordList = topic.keywords;
+                for(Topic topic : EventManager.getSubscriberMap().keySet()){
+                    List<String> keywordList = topic.getKeywords();
                     System.out.println("in the block 2");
                     if(keywordList.contains(keyword)){
                         System.out.println("keyword matched");
-                        List subscriberList = EventManager.subscriberMap.get(topic);
+                        List subscriberList = EventManager.getSubscriberMap().get(topic);
                         subscriberList.add(subscriber);
-                        subscribedTopics.add(topic.name);
+                        subscribedTopics.add(topic.getName());
                     }
                 }
 
@@ -86,14 +85,14 @@ public class ThreadHandler extends Thread implements Serializable{
                 InetAddress remoteInetAddress = socket.getInetAddress();
 
                 List<SubscriberDetails> subscriberList = null;
-                for(Topic t : EventManager.subscriberMap.keySet()){
-                    if(t.name.equals(topicToUnsubscribe)){
+                for(Topic t : EventManager.getSubscriberMap().keySet()){
+                    if(t.getName().equals(topicToUnsubscribe)){
                         System.out.println("topic name matched");
-                        subscriberList = EventManager.subscriberMap.get(t);
+                        subscriberList = EventManager.getSubscriberMap().get(t);
                         Iterator iter = subscriberList.iterator();
                         while (iter.hasNext()){
                             SubscriberDetails sub = (SubscriberDetails) iter.next();
-                            if(sub.ipAddress.equals(remoteInetAddress)){
+                            if(sub.getIpAddress().equals(remoteInetAddress)){
                                 subscriberList.remove(sub);
                                 System.out.println("subscriber removed");
                                 break;
@@ -106,12 +105,12 @@ public class ThreadHandler extends Thread implements Serializable{
                 InetAddress remoteInetAddress = socket.getInetAddress();
 
                 List<SubscriberDetails> subscriberList = null;
-                for(Topic t : EventManager.subscriberMap.keySet()){
-                        subscriberList = EventManager.subscriberMap.get(t);  // get value from Map
+                for(Topic t : EventManager.getSubscriberMap().keySet()){
+                        subscriberList = EventManager.getSubscriberMap().get(t);  // get value from Map
                         Iterator iter = subscriberList.iterator();          // for List - you can use iterator or for-each loop
                         while (iter.hasNext()){
                             SubscriberDetails sub = (SubscriberDetails) iter.next();
-                            if(sub.ipAddress.equals(remoteInetAddress)){
+                            if(sub.getIpAddress().equals(remoteInetAddress)){
                                 iter.remove();          // to avoid concurrent modification exception
                                 System.out.println("subscriber removed");
                             }
@@ -128,7 +127,7 @@ public class ThreadHandler extends Thread implements Serializable{
             try {
                 socket.close();
                 System.out.println("Connection on " + socket.getLocalPort() + " closed : " + socket.isClosed() + "\n" );
-                EventManager.busyPorts.remove(currentPort);
+                EventManager.getBusyPorts().remove(currentPort);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -8,36 +8,8 @@ import edu.rit.CSCI652.demo.Topic;
 import java.io.*;
 import java.net.Socket;
 
-public class PubSubAgent implements Publisher, Subscriber, Serializable{
+public class PubSubAgent implements Publisher, Serializable{
 
-	@Override
-	public void subscribe(Topic topic) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void subscribe(String keyword) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void unsubscribe(Topic topic) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void unsubscribe() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listSubscribedTopics() {
-		// TODO Auto-generated method stub
-	}
 
 	@Override
 	public void publish(Event event) throws IOException {
