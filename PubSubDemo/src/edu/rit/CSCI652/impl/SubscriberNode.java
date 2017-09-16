@@ -29,7 +29,11 @@ public class SubscriberNode implements Serializable {
             System.out.println();
             System.out.println("***** Choose an option : ");
             System.out.println("1. Subscribe");
-            System.out.println("2. Un-subscribe");
+            System.out.println("2. Subscribe by keyword");
+            System.out.println("3. Un-subscribe");
+            System.out.println("4. Un-subscribe to all the subscribe topics");
+            System.out.println("5. Show list of all subscribed topics");
+
             int option = scanner.nextInt();
             scanner.nextLine();                 // need this after reading nextInt()
             if(option == 1 ){                   // subscribe
@@ -46,7 +50,7 @@ public class SubscriberNode implements Serializable {
 
                 ObjectInputStream objectInStream2 = new ObjectInputStream(reconnectSocket.getInputStream());
                 System.out.println("\n " + reconnectSocket.getLocalPort() + " \n");
-                List<Topic> topicList = (List) objectInStream2.readObject();
+                List<Topic> topicList = (List<Topic>) objectInStream2.readObject();
                 Iterator iter = topicList.iterator();
                 System.out.println("   **********  Topic list  **********  ");
                 while (iter.hasNext()){
@@ -80,7 +84,33 @@ public class SubscriberNode implements Serializable {
 
             }else if(option == 2){
                 Socket subscriberSocket = new Socket("localhost", 2000);
-                System.out.println("\nConnection request sent on public port  2000");
+                System.out.println("\n Connection request sent on public port  2000");
+                ObjectInputStream objectInStream = new ObjectInputStream(subscriberSocket.getInputStream());
+                int reconnectPort = objectInStream.readInt();
+                Socket reconnectSocket = new Socket("localhost", reconnectPort);
+                System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
+
+                ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
+                outObject.writeUTF("Subscribe by keyword");
+                outObject.flush();
+
+                System.out.println("Please enter a keyword : ");
+                String keyword = scanner.nextLine();
+                outObject.writeUTF(keyword);
+                outObject.flush();
+
+                ObjectInputStream objectInStream2 = new ObjectInputStream(reconnectSocket.getInputStream());
+                List<String> topicList = (List<String>) objectInStream2.readObject();
+                subscribedTopics.addAll(topicList);
+                System.out.println("You have subscribed to following topics :");
+                int index = 0;
+                for(String topic : topicList){
+                    System.out.println(++index + ". " + topic);
+                }
+
+            }else if(option == 3){
+                Socket subscriberSocket = new Socket("localhost", 2000);
+                System.out.println("\n Connection request sent on public port  2000");
                 ObjectInputStream objectInStream = new ObjectInputStream(subscriberSocket.getInputStream());
                 int reconnectPort = objectInStream.readInt();
                 Socket reconnectSocket = new Socket("localhost", reconnectPort);
@@ -108,15 +138,37 @@ public class SubscriberNode implements Serializable {
                     outObject.writeUTF(topicToUnsubscribe);
                     outObject.flush();
                 }else {
+                    System.out.println("\n You have not subscribed to any topics ");
+                }
+            }else if(option == 4){
+                Socket subscriberSocket = new Socket("localhost", 2000);
+                System.out.println("\nConnection request sent on public port  2000");
+                ObjectInputStream objectInStream = new ObjectInputStream(subscriberSocket.getInputStream());
+                int reconnectPort = objectInStream.readInt();
+                Socket reconnectSocket = new Socket("localhost", reconnectPort);
+                System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
+
+                ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
+                outObject.writeUTF("Un-subscriber_All");
+                outObject.flush();
+
+                if(!subscribedTopics.isEmpty()){
+                    subscribedTopics.clear();
+                }else {
                     System.out.println(" You have not subscribed to any topics ");
                 }
-
-
+            }else if(option == 5){
+                int index = 0;
+                if(!subscribedTopics.isEmpty()){
+                    System.out.println("\n ********  You have subscribed to the following topics ********");
+                    for(String topic : subscribedTopics){
+                        System.out.println(++index + ". "  +topic);
+                    }
+                }else {
+                    System.out.println("\n ********  You have not subscribed to any topics");
+                }
 
             }
         }
-
-
-
     }
 }

@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8c8d5640-3fa8-4ec3-a438-96d318ca6205" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/SubscriberDetails.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/SubscriberNode.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/demo/PublisherNode.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/PublisherNode.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PublisherNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/EventManager.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/EventManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/PubSubAgent.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/PubSubAgent.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/demo/Topic.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/demo/Topic.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/SubscriberNode.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/SubscriberNode.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/ThreadHandler.class" afterPath="$PROJECT_DIR$/bin/edu/rit/CSCI652/impl/ThreadHandler.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Topic.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Topic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/SubscriberNode.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/SubscriberNode.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -31,8 +27,8 @@
       <file leaf-file-name="EventManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="34" column="54" lean-forward="true" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
+            <state relative-caret-position="224">
+              <caret line="24" column="69" lean-forward="true" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,10 +39,20 @@
       <file leaf-file-name="ThreadHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+            <state relative-caret-position="1185">
+              <caret line="79" column="54" lean-forward="false" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Topic.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Topic.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -55,8 +61,8 @@
       <file leaf-file-name="PubSubAgent.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="59" column="41" lean-forward="false" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
+            <state relative-caret-position="390">
+              <caret line="37" column="40" lean-forward="false" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -65,11 +71,10 @@
       <file leaf-file-name="PublisherNode.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PublisherNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-388">
-              <caret line="29" column="47" lean-forward="true" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+            <state relative-caret-position="135">
+              <caret line="46" column="47" lean-forward="true" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#502#518#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,21 +83,11 @@
       <file leaf-file-name="SubscriberNode.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/SubscriberNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="15" lean-forward="true" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+            <state relative-caret-position="344">
+              <caret line="110" column="34" lean-forward="true" selection-start-line="110" selection-start-column="34" selection-end-line="110" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Subscriber.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Subscriber.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -132,7 +127,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Topic.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Publisher.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/EventManagerServer.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerServer.java" />
@@ -146,6 +140,7 @@
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/SubscriberNode.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PublisherNode.java" />
+        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Topic.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/SubscriberNode.java" />
       </list>
@@ -172,6 +167,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -327,8 +324,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -642,15 +637,14 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2599119" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2555066" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24474959" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24798061" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -661,6 +655,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -705,18 +700,30 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java</url>
-          <line>58</line>
+          <line>115</line>
           <properties />
-          <option name="timeStamp" value="22" />
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java</url>
-          <line>74</line>
+          <line>70</line>
           <properties />
-          <option name="timeStamp" value="23" />
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java</url>
+          <line>66</line>
+          <properties />
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/SubscriberNode.java</url>
+          <line>105</line>
+          <properties />
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="25" />
+      <option name="time" value="33" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -749,7 +756,6 @@
           <caret line="27" column="55" lean-forward="true" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#502#518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -778,9 +784,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="35" column="66" lean-forward="false" selection-start-line="35" selection-start-column="66" selection-end-line="35" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -808,7 +812,6 @@
           <caret line="47" column="89" lean-forward="true" selection-start-line="47" selection-start-column="89" selection-end-line="47" selection-end-column="89" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#502#518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -864,7 +867,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#502#518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -920,7 +922,6 @@
           <caret line="30" column="53" lean-forward="true" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#502#518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -976,7 +977,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#502#518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1025,7 +1025,6 @@
           <caret line="35" column="55" lean-forward="true" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#502#518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1090,16 +1089,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManagerPublish.java" />
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Topic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/src.zip!/java/io/PrintStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
@@ -1126,25 +1115,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="59" column="41" lean-forward="false" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PublisherNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-388">
-          <caret line="29" column="47" lean-forward="true" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#502#518#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/SubscriberDetails.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1153,28 +1123,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Subscriber.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Topic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1185">
+          <caret line="79" column="54" lean-forward="false" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="34" column="54" lean-forward="true" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
+        <state relative-caret-position="224">
+          <caret line="24" column="69" lean-forward="true" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/demo/Subscriber.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        <state relative-caret-position="390">
+          <caret line="37" column="40" lean-forward="false" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/ThreadHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PublisherNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        <state relative-caret-position="135">
+          <caret line="46" column="47" lean-forward="true" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1183,8 +1179,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/impl/SubscriberNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="15" lean-forward="true" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+        <state relative-caret-position="344">
+          <caret line="110" column="34" lean-forward="true" selection-start-line="110" selection-start-column="34" selection-end-line="110" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
