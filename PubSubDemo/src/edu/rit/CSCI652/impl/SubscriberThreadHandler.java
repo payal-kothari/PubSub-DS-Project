@@ -1,5 +1,7 @@
 package edu.rit.CSCI652.impl;
 
+import edu.rit.CSCI652.demo.Event;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
@@ -15,15 +17,15 @@ public class SubscriberThreadHandler extends Thread{
 
     public void run(){
             try {
-
                 Socket socket = SubscriberNode.getNotificationListenSocket().accept();
-                System.out.println("accepted a connection from  port :" + socket.getPort() );
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\taccepted a connection from  port :" + socket.getPort() );
                 objectInStream = new ObjectInputStream(socket.getInputStream());
-                List<String> l = (List<String>) objectInStream.readObject();
+                //List<String> l = (List<String>) objectInStream.readObject();
+                List<Event> l = (List<Event>) objectInStream.readObject();
 
-                System.out.println("New articles added under following topics : ");
-                for(String name : l){
-                    System.out.println("* " + name);
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tNew articles ");
+                for(Event event : l){
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t* Topic name - " + event.getTopic().getName() + " * Article name - " + event.getTitle());
                 }
 
                 socket.close();

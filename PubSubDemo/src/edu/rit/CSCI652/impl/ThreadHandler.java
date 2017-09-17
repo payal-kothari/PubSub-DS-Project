@@ -66,7 +66,6 @@ public class ThreadHandler extends Thread implements Serializable{
 //                Event article = (Event) objectInStream.readObject();                // event = article
                 EventManager.getEventMap().put(article.getId(), article);
                 System.out.println("Article " +  "'" + article.getTitle() +"'"+ " added under topic name - " + "'" + article.getTopic().getName() + "'");
-                System.out.println(EventManager.getSubscriberMap());
                 List<SubscriberDetails> list = EventManager.getSubscriberMap().get(article.getTopic());
 
                 if(list != null){
@@ -78,6 +77,7 @@ public class ThreadHandler extends Thread implements Serializable{
                 outObject.writeObject(EventManager.getTopicList());
                 outObject.flush();
                 System.out.println("Topic list sent");
+
                 if(!EventManager.getTopicList().isEmpty()){
                     int topicIdToSubscribe = objectInStream.read();
                     System.out.println("Subscribe to topic - '" + EventManager.getTopicList().get(--topicIdToSubscribe).getName() + "'");

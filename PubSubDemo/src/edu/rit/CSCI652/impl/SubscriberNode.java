@@ -30,6 +30,7 @@ public class SubscriberNode implements Subscriber, Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         notificationListenSocket  = new ServerSocket(8000);
         init();
+        notificationListenSocket.close();
     }
 
     private static void init() throws IOException, ClassNotFoundException {
@@ -65,34 +66,44 @@ public class SubscriberNode implements Subscriber, Serializable {
                 System.out.println("\n " + reconnectSocket.getLocalPort() + " \n");
                 List<Topic> topicList = (List<Topic>) objectInStream2.readObject();
                 Iterator iter = topicList.iterator();
-                System.out.println("   **********  Topic list  **********  ");
-                while (iter.hasNext()){
-                    Topic t = (Topic) iter.next();
-                    if(!subscribedTopics.isEmpty() && !subscribedTopics.contains(t.getName())){
-                        System.out.println(t.getId() + ". "+ t.getName());
-                    }else if(subscribedTopics.isEmpty()){
-                        System.out.println(t.getId() + ". "+ t.getName());
-                    }
-                }
 
                 if(!topicList.isEmpty()){
-                    System.out.println("Please enter the topic number you want to subscribe to ");
-
-                    int topicId = scanner.nextInt();
-                    scanner.nextLine();
-                    outObject.write(topicId);
-                    outObject.flush();
-
-                    Iterator iter2 = topicList.iterator();
-                    while (iter2.hasNext()){
-                        Topic t = (Topic) iter2.next();
-                        if(t.getId() == topicId){
-                            subscribedTopics.add(t.getName());
+                    System.out.println("   **********  Topic list  **********  ");
+                    boolean subscribedAll = true;
+                    while (iter.hasNext()){
+                        Topic t = (Topic) iter.next();
+                        if(!subscribedTopics.isEmpty() && !subscribedTopics.contains(t.getName())){
+                            subscribedAll = false;
+                            System.out.println(t.getId() + ". "+ t.getName());
+                        }else if(subscribedTopics.isEmpty()){
+                            subscribedAll = false;
+                            System.out.println(t.getId() + ". "+ t.getName());
                         }
                     }
-                }else{
-                    System.out.println(" No topics available ");
+
+                    if(!topicList.isEmpty() && subscribedAll == false){
+                        System.out.println("Please enter the topic number you want to subscribe to ");
+
+                        int topicId = scanner.nextInt();
+                        scanner.nextLine();
+                        outObject.write(topicId);
+                        outObject.flush();
+
+                        Iterator iter2 = topicList.iterator();
+                        while (iter2.hasNext()){
+                            Topic t = (Topic) iter2.next();
+                            if(t.getId() == topicId){
+                                subscribedTopics.add(t.getName());
+                            }
+                        }
+                    }else if(subscribedAll == true){
+                        System.out.println(" you have subscribed all topics");
+                    }
+                }else {
+                    System.out.println("No topics available");
                 }
+
+
 
             }else if(option == 2){
                 Socket subscriberSocket = new Socket("localhost", 2000);
@@ -101,6 +112,8 @@ public class SubscriberNode implements Subscriber, Serializable {
                 int reconnectPort = objectInStream.readInt();
                 Socket reconnectSocket = new Socket("localhost", reconnectPort);
                 System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
+
+                new SubscriberThreadHandler().start();
 
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Subscribe by keyword");
@@ -127,6 +140,8 @@ public class SubscriberNode implements Subscriber, Serializable {
                 int reconnectPort = objectInStream.readInt();
                 Socket reconnectSocket = new Socket("localhost", reconnectPort);
                 System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
+
+                new SubscriberThreadHandler().start();
 
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Un-subscriber");
@@ -160,6 +175,8 @@ public class SubscriberNode implements Subscriber, Serializable {
                 Socket reconnectSocket = new Socket("localhost", reconnectPort);
                 System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
 
+                new SubscriberThreadHandler().start();
+
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Un-subscriber_All");
                 outObject.flush();
@@ -182,6 +199,9 @@ public class SubscriberNode implements Subscriber, Serializable {
 
             }
         }
+
+
+
     }
 
     @Override

@@ -33,11 +33,13 @@ public class NotifyThreadHandler extends Thread{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        List<String> l = new ArrayList<>();
+        //List<String> l = new ArrayList<>();
+        List<Event> l = new ArrayList<>();
 
         while (iter.hasNext()){
             Event e = (Event) iter.next();
-            l.add(e.getTopic().getName());
+//            l.add(e.getTopic().getName());
+            l.add(e);
         }
 
         try {
