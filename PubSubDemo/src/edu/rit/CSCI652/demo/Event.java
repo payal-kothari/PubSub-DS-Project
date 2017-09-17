@@ -22,10 +22,6 @@ public class Event implements Serializable {
 	}
 
 
-
-
-
-
 	public Event(int id, Topic topic, String title, String content){
 		this.id = id;
 		this.topic = topic;

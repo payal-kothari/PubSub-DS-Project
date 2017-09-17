@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,14 +21,21 @@ public class SubscriberNode implements Subscriber, Serializable {
 
     private static List<String> subscribedTopics = new ArrayList<>();
 
+    public static ServerSocket getNotificationListenSocket() {
+        return notificationListenSocket;
+    }
+
+    private static ServerSocket notificationListenSocket;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        notificationListenSocket  = new ServerSocket(8000);
         init();
     }
 
     private static void init() throws IOException, ClassNotFoundException {
 
         Scanner scanner = new Scanner(System.in);
+
         while (true){
             System.out.println();
             System.out.println("***** Choose an option : ");
@@ -46,6 +54,8 @@ public class SubscriberNode implements Subscriber, Serializable {
                 int reconnectPort = objectInStream.readInt();
                 Socket reconnectSocket = new Socket("localhost", reconnectPort);
                 System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
+
+                new SubscriberThreadHandler().start();
 
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Subscriber");
@@ -83,7 +93,6 @@ public class SubscriberNode implements Subscriber, Serializable {
                 }else{
                     System.out.println(" No topics available ");
                 }
-
 
             }else if(option == 2){
                 Socket subscriberSocket = new Socket("localhost", 2000);

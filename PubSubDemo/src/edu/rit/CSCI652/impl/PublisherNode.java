@@ -18,11 +18,11 @@ public class PublisherNode {
     private static HashMap<Integer, Topic> allTopicsMap =  new HashMap<Integer, Topic>();
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         init();
     }
 
-    private static void init() throws IOException {
+    private static void init() throws IOException, ClassNotFoundException {
         Scanner scanner = new Scanner(System.in);
         while (true){
             System.out.println();
@@ -48,25 +48,27 @@ public class PublisherNode {
                 createNewTopicAndAdvertise();
             }else if(option == 2){
                 eventId++;
-                if(allTopicsMap != null && !allTopicsMap.isEmpty()){
-                    System.out.println("***********   Topic names   ***********");
-                    for(Map.Entry<Integer, Topic> entry : allTopicsMap.entrySet()){
-                        System.out.println(entry.getKey() + " " + entry.getValue().getName());
 
-                    }
-                    System.out.println("Please select one option from the above list: ");
-                    int topicIndexNum = scanner.nextInt();
-                    scanner.nextLine();
-                    Topic selectedTopic = allTopicsMap.get(topicIndexNum);
-                    System.out.println("Please enter the title of the event: ");
-                    String title = scanner.nextLine();
-                    System.out.println("Please enter the content of the event: ");
-                    String content = scanner.nextLine();
-                    Event event = new Event(eventId, selectedTopic, title, content);
-                    new PubSubAgent().publish(event);
-                }else {
-                    System.out.println("No topics available");
-                }
+                new PubSubAgent().publish(eventId);
+//                if(allTopicsMap != null && !allTopicsMap.isEmpty()){
+//                    System.out.println("***********   Topic names   ***********");
+//                    for(Map.Entry<Integer, Topic> entry : allTopicsMap.entrySet()){
+//                        System.out.println(entry.getKey() + " " + entry.getValue().getName());
+//
+//                    }
+//                    System.out.println("Please select one option from the above list: ");
+//                    int topicIndexNum = scanner.nextInt();
+//                    scanner.nextLine();
+//                    Topic selectedTopic = allTopicsMap.get(topicIndexNum);
+//                    System.out.println("Please enter the title of the event: ");
+//                    String title = scanner.nextLine();
+//                    System.out.println("Please enter the content of the event: ");
+//                    String content = scanner.nextLine();
+//                    Event event = new Event(eventId, selectedTopic, title, content);
+//                    new PubSubAgent().publish(event);
+//                }else {
+//                    System.out.println("No topics available");
+//                }
             }
         }
     }

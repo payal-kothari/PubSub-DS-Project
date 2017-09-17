@@ -6,7 +6,7 @@ public interface Publisher {
 	/*
 	 * publish an event of a specific topic with title and content
 	 */
-	public void publish(Event event) throws IOException;
+	public void publish(int eventId) throws IOException, ClassNotFoundException;
 	
 	/*
 	 * advertise new topic

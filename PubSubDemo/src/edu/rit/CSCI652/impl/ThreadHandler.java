@@ -40,24 +40,54 @@ public class ThreadHandler extends Thread implements Serializable{
                 Topic topic = (Topic) objectInStream.readObject();
                 em.addTopic(topic);
             }else if(input.equals("Publish")){
-                System.out.println("Publishing an article");
-                Event article = (Event) objectInStream.readObject();                // event = article
-                EventManager.getEventMap().put(article.getId(), article);
-                System.out.println("Article " +  "'" + article.getTitle() +"'"+ " added under topic name - " + "'" + article.getTopic().getName() + "'");
-            }else if(input.equals("Subscriber")){
+
                 ObjectOutputStream outObject = new ObjectOutputStream(socket.getOutputStream());
                 outObject.writeObject(EventManager.getTopicList());
                 outObject.flush();
                 System.out.println("Topic list sent");
 
-                int topicIdToSubscribe = objectInStream.read();
-                System.out.println("Subscribe to topic - '" + EventManager.getTopicList().get(--topicIdToSubscribe).getName() + "'");
-                SubscriberDetails subscriber = new SubscriberDetails(socket.getInetAddress(), 8000);  // 8000 for all subscribers
-                List subscriberList = EventManager.getSubscriberMap().get(EventManager.getTopicList().get(topicIdToSubscribe));
-                subscriberList.add(subscriber);
-               // EventManager.subscriberMap.put(EventManager.topicList.get(topicIdToSubscribe), list);
-                System.out.println("Subscriber added");
+                System.out.println("Publishing an article");
 
+                int eventId = objectInStream.read();
+                int topicId = objectInStream.read();
+                String eventTitle = objectInStream.readUTF();
+                String eventContent = objectInStream.readUTF();
+
+                Topic topic = null;
+
+                for(Topic t : EventManager.getTopicList()){
+                    if(t.getId() == topicId){
+                        topic = t;
+                    }
+                }
+
+                Event article = new Event(eventId, topic, eventTitle, eventContent);
+
+//                Event article = (Event) objectInStream.readObject();                // event = article
+                EventManager.getEventMap().put(article.getId(), article);
+                System.out.println("Article " +  "'" + article.getTitle() +"'"+ " added under topic name - " + "'" + article.getTopic().getName() + "'");
+                System.out.println(EventManager.getSubscriberMap());
+                List<SubscriberDetails> list = EventManager.getSubscriberMap().get(article.getTopic());
+
+                if(list != null){
+                    addAddresses(list, article);
+                }
+
+            }else if(input.equals("Subscriber")){
+                ObjectOutputStream outObject = new ObjectOutputStream(socket.getOutputStream());
+                outObject.writeObject(EventManager.getTopicList());
+                outObject.flush();
+                System.out.println("Topic list sent");
+                if(!EventManager.getTopicList().isEmpty()){
+                    int topicIdToSubscribe = objectInStream.read();
+                    System.out.println("Subscribe to topic - '" + EventManager.getTopicList().get(--topicIdToSubscribe).getName() + "'");
+                    SubscriberDetails subscriber = new SubscriberDetails(socket.getInetAddress(), 8000);  // 8000 for all subscribers
+                    List subscriberList = EventManager.getSubscriberMap().get(EventManager.getTopicList().get(topicIdToSubscribe));
+                    subscriberList.add(subscriber);
+
+                    // EventManager.subscriberMap.put(EventManager.topicList.get(topicIdToSubscribe), list);
+                    System.out.println("Subscriber added");
+                }
             }else if(input.equals("Subscribe by keyword")){
 
                 List<String> subscribedTopics = new ArrayList<>();
@@ -132,6 +162,21 @@ public class ThreadHandler extends Thread implements Serializable{
                 e.printStackTrace();
             }
         }
+    }
+
+    private void addAddresses(List<SubscriberDetails> list, Event article) {
+
+        for(SubscriberDetails sub : list){
+            if(!EventManager.getSubscribersToContact().containsKey(sub.getIpAddress())){
+                List l = new ArrayList<>();
+                l.add(article);
+                EventManager.getSubscribersToContact().put(sub.getIpAddress(),l);
+            }else {
+                List l = EventManager.getSubscribersToContact().get(sub.getIpAddress());
+                l.add(article);
+            }
+        }
+
     }
 
 }

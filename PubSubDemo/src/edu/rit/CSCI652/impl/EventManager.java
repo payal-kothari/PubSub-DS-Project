@@ -7,6 +7,7 @@ import edu.rit.CSCI652.demo.Topic;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
@@ -14,7 +15,7 @@ import java.util.*;
 // Test cases
 
 // 1) add a topic and advertise
-// 2) one or more subscriber subscribes
+// 2) one or more subscriber subscribe
 // 3) time de-coupling : bring down one og the subscriber , use a publisher to publish , and you must notify a subscriber when it comes online
 // comments
 // create multiple dockers, check they can talk to each other
@@ -28,7 +29,13 @@ public class EventManager implements Serializable {
     private static HashMap<Integer, Event> eventMap = new HashMap<>();
     private static HashSet<Integer> busyPorts = new HashSet<>();
     private static HashMap<Topic, List<SubscriberDetails>> subscriberMap = new HashMap<>();
+    private static Socket origSocket;
 
+    public static HashMap<InetAddress, List<Event>> getSubscribersToContact() {
+        return subscribersToContact;
+    }
+
+    private static HashMap<InetAddress, List<Event>> subscribersToContact = new HashMap<>();
 
     public static List<Topic> getTopicList() {
         return topicList;
@@ -45,7 +52,6 @@ public class EventManager implements Serializable {
     public static HashMap<Topic, List<SubscriberDetails>> getSubscriberMap() {
         return subscriberMap;
     }
-
 
     /*
 	 * Start the repo service
@@ -64,22 +70,33 @@ public class EventManager implements Serializable {
             int nextFreePort = getNewFreePort();
             busyPorts.add(nextFreePort);
             ServerSocket subServerSocket = new ServerSocket(nextFreePort);
-            Socket socket = eventManagerSocket.accept();
-            System.out.println("Connection established on public port : " + socket.getLocalPort());
-            ObjectOutputStream outObject = new ObjectOutputStream(socket.getOutputStream());
+            origSocket = eventManagerSocket.accept();
+            System.out.println("Connection established on public port : " + origSocket.getLocalPort());
+            ObjectOutputStream outObject = new ObjectOutputStream(origSocket.getOutputStream());
             outObject.writeInt(nextFreePort);
             outObject.flush();
             System.out.println("Reconnect port sent " + nextFreePort);
+            origSocket.close();
             Socket subSocket = subServerSocket.accept();
             System.out.println("Reconnected on port " + subSocket.getLocalPort());
+
+            checkToNotify(subSocket.getInetAddress());
+
           //  socketList.add(subSocket);    // no need
             new ThreadHandler(subSocket, nextFreePort).start();
         }
 	}
 
-	/*
-	 * notify all subscribers of new event 
-	 */
+    private void checkToNotify(InetAddress ipAddress) {
+	    if(subscribersToContact.containsKey(ipAddress)){
+            new NotifyThreadHandler(ipAddress, subscribersToContact.get(ipAddress)).start();
+        }
+
+    }
+
+    /*
+     * notify all subscribers of new event
+     */
 	private void notifySubscribers(Event event) {
 		
 	}
