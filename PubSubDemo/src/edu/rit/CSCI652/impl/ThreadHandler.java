@@ -183,6 +183,10 @@ public class ThreadHandler extends Thread implements Serializable{
         }
     }
 
+    /*
+     * update addresses of subscribers for newly published article
+     */
+
     private void addAddresses(List<SubscriberDetails> list, Event article) {
 
         for(SubscriberDetails sub : list){

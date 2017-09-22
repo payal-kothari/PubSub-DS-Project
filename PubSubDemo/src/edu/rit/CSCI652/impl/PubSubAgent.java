@@ -17,7 +17,6 @@ public class PubSubAgent implements Publisher, Serializable{
 
 	@Override
 	public void publish(int eventId) throws IOException, ClassNotFoundException {
-		// TODO Auto-generated method stub
         Socket publishSocket = new Socket("localhost", 2000);
         ObjectInputStream objectInStream = new ObjectInputStream(publishSocket.getInputStream());
         int reconnectPort = objectInStream.readInt();
@@ -57,7 +56,6 @@ public class PubSubAgent implements Publisher, Serializable{
 
 	@Override
 	public void advertise(Topic newTopic) throws IOException {
-		// TODO Auto-generated method stub
 		Socket advertiserSocket = new Socket("localhost", 2000);
         ObjectInputStream objectInStream = new ObjectInputStream(advertiserSocket.getInputStream());
         int reconnectPort = objectInStream.readInt();

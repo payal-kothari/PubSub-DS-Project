@@ -20,7 +20,6 @@ public class SubscriberThreadHandler extends Thread{
                 while (true){
                     Socket socket = SubscriberNode.getNotificationListenSocket().accept();
                     objectInStream = new ObjectInputStream(socket.getInputStream());
-                    //List<String> l = (List<String>) objectInStream.readObject();
                     List<Event> l = (List<Event>) objectInStream.readObject();
 
                     System.out.println("\n\n\n");

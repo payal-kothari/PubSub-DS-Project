@@ -59,15 +59,10 @@ public class EventManager implements Serializable {
 	private void startService() throws IOException, ClassNotFoundException {
 		eventManagerSocket = new ServerSocket(2000);
 		busyPorts.add(2000);
-        new NotifyThreadHandler().start();
+        new NotifyThreadHandler().start();    // new thread to send out notifications
 		System.out.println("Event Manager started\n");
         socketList = new ArrayList<>();
 		while (true){
-			// Server can accepts connections from two different clients at the same time on the same port but
-			// both clients can not talk at the same time on that same port. So, connect two different clients
-			// on different ports of the server to make the system scalable.
-
-            // randomize the ports for security .. ex. hashing
             int nextFreePort = getNewFreePort();
             busyPorts.add(nextFreePort);
             ServerSocket subServerSocket = new ServerSocket(nextFreePort);
@@ -77,18 +72,10 @@ public class EventManager implements Serializable {
             outObject.flush();
             origSocket.close();
             Socket subSocket = subServerSocket.accept();
-            new ThreadHandler(subSocket, nextFreePort).start();
+            new ThreadHandler(subSocket, nextFreePort).start();  // new thread for new connection
         }
 	}
 
-
-
-    /*
-     * notify all subscribers of new event
-     */
-	private void notifySubscribers(Event event) {
-		
-	}
 	
 	/*
 	 * add new topic when received advertisement of new topic
@@ -102,32 +89,9 @@ public class EventManager implements Serializable {
         System.out.println("Topic - " + "'" + topic.getName() + "'" + " added");
     }
 
-	/*
-	 * add subscriber to the internal list
-	 */
-	private void addSubscriber(){               // done
-
-	}
-	
-	/*
-	 * remove subscriber from the list
-	 */
-	private void removeSubscriber(){
-		
-	}
-	
-	/*
-	 * show the list of subscriber for a specified topic
-	 */
-	private void showSubscribers(Topic topic){
-		
-	}
-	
-	
-	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		new EventManager().startService();
-	}
-
+    /*
+     * find new free port for new client
+     */
 
     public int getNewFreePort() {
         Random random = new Random();
@@ -140,4 +104,8 @@ public class EventManager implements Serializable {
         }
         return newPort;
     }
+	
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		new EventManager().startService();
+	}
 }

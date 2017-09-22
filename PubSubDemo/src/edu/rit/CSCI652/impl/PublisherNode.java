@@ -42,7 +42,6 @@ public class PublisherNode {
                 createNewTopicAndAdvertise();
             }else if(option == 2){
                 eventId++;
-
                 new PubSubAgent().publish(eventId);
             }
         }
