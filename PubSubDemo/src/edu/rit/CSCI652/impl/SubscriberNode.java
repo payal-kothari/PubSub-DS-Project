@@ -28,9 +28,10 @@ public class SubscriberNode implements Subscriber, Serializable {
     private static ServerSocket notificationListenSocket;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+
         notificationListenSocket  = new ServerSocket(8000);
+        new SubscriberThreadHandler().start();
         init();
-        notificationListenSocket.close();
     }
 
     private static void init() throws IOException, ClassNotFoundException {
@@ -56,7 +57,6 @@ public class SubscriberNode implements Subscriber, Serializable {
                 Socket reconnectSocket = new Socket("localhost", reconnectPort);
                 System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
 
-                new SubscriberThreadHandler().start();
 
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Subscriber");
@@ -113,8 +113,6 @@ public class SubscriberNode implements Subscriber, Serializable {
                 Socket reconnectSocket = new Socket("localhost", reconnectPort);
                 System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
 
-                new SubscriberThreadHandler().start();
-
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Subscribe by keyword");
                 outObject.flush();
@@ -140,8 +138,6 @@ public class SubscriberNode implements Subscriber, Serializable {
                 int reconnectPort = objectInStream.readInt();
                 Socket reconnectSocket = new Socket("localhost", reconnectPort);
                 System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
-
-                new SubscriberThreadHandler().start();
 
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Un-subscriber");
@@ -174,8 +170,6 @@ public class SubscriberNode implements Subscriber, Serializable {
                 int reconnectPort = objectInStream.readInt();
                 Socket reconnectSocket = new Socket("localhost", reconnectPort);
                 System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
-
-                new SubscriberThreadHandler().start();
 
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Un-subscriber_All");

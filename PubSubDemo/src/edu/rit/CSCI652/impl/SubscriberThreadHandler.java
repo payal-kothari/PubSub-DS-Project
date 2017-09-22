@@ -17,20 +17,22 @@ public class SubscriberThreadHandler extends Thread{
 
     public void run(){
             try {
-                Socket socket = SubscriberNode.getNotificationListenSocket().accept();
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\taccepted a connection from  port :" + socket.getPort() );
-                objectInStream = new ObjectInputStream(socket.getInputStream());
-                //List<String> l = (List<String>) objectInStream.readObject();
-                List<Event> l = (List<Event>) objectInStream.readObject();
+                while (true){
+                    System.out.println("Thread started");
+                    Socket socket = SubscriberNode.getNotificationListenSocket().accept();
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\taccepted a connection from  port :" + socket.getPort() );
+                    objectInStream = new ObjectInputStream(socket.getInputStream());
+                    //List<String> l = (List<String>) objectInStream.readObject();
+                    List<Event> l = (List<Event>) objectInStream.readObject();
 
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tNew articles ");
-                for(Event event : l){
-                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t* Topic name - " + event.getTopic().getName() + " * Article name - " + event.getTitle());
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tNew articles ");
+                    for(Event event : l){
+                        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t* Topic name - " + event.getTopic().getName() + " * Article name - " + event.getTitle());
+                    }
+
+                    objectInStream.close();
+                    socket.close();
                 }
-
-                socket.close();
-                objectInStream.close();
-
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {

@@ -59,6 +59,7 @@ public class EventManager implements Serializable {
 	private void startService() throws IOException, ClassNotFoundException {
 		eventManagerSocket = new ServerSocket(2000);
 		busyPorts.add(2000);
+        new NotifyThreadHandler().start();
 		System.out.println("Event Manager started\n");
         socketList = new ArrayList<>();
 		while (true){
@@ -80,19 +81,14 @@ public class EventManager implements Serializable {
             Socket subSocket = subServerSocket.accept();
             System.out.println("Reconnected on port " + subSocket.getLocalPort());
 
-            checkToNotify(subSocket.getInetAddress());
+
 
           //  socketList.add(subSocket);    // no need
             new ThreadHandler(subSocket, nextFreePort).start();
         }
 	}
 
-    private void checkToNotify(InetAddress ipAddress) {
-	    if(subscribersToContact.containsKey(ipAddress)){
-            new NotifyThreadHandler(ipAddress, subscribersToContact.get(ipAddress)).start();
-        }
 
-    }
 
     /*
      * notify all subscribers of new event
