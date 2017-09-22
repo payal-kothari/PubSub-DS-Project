@@ -10,10 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by payalkothari on 9/15/17.
@@ -72,7 +69,7 @@ public class SubscriberNode implements Subscriber, Serializable {
                     System.out.println("   **********  Topic list  **********  ");
                     while (iter.hasNext()){
                         Topic t = (Topic) iter.next();
-                            System.out.println(t.getId() + ". "+ t.getName());
+                            System.out.println(t.getId() + ". "+ t.getName() + "   " + Arrays.toString(t.getKeywords().toArray()) );
                     }
 
                     if(!topicList.isEmpty()){
@@ -115,12 +112,15 @@ public class SubscriberNode implements Subscriber, Serializable {
                 ObjectInputStream objectInStream2 = new ObjectInputStream(reconnectSocket.getInputStream());
                 List<String> topicList = (List<String>) objectInStream2.readObject();
                 subscribedTopics.addAll(topicList);
-                System.out.println("You have subscribed to following topics :");
-                int index = 0;
-                for(String topic : topicList){
-                    System.out.println(++index + ". " + topic);
+                System.out.println("You have subscribed to following topic(s) :");
+                if(topicList.isEmpty()){
+                    System.out.println("No topics availbale for entered keyword");
+                }else {
+                    int index = 0;
+                    for(String topic : topicList){
+                        System.out.println(++index + ". " + topic);
+                    }
                 }
-
             }else if(option == 3){
                 Socket subscriberSocket = new Socket("localhost", 2000);
                 System.out.println("\n Connection request sent on public port  2000");
@@ -140,7 +140,7 @@ public class SubscriberNode implements Subscriber, Serializable {
                 int index = 0;
                 while (iter.hasNext()){
                     Topic topic = (Topic) iter.next();
-                    System.out.println(topic.getId() + ". " + topic.getName());
+                    System.out.println(topic.getId() + ". " + topic.getName() + "   " + Arrays.toString(topic.getKeywords().toArray()));
                 }
 
                 if(!topicList.isEmpty()){
@@ -199,7 +199,7 @@ public class SubscriberNode implements Subscriber, Serializable {
                     System.out.println(" ********** Subscribed Topics **********");
                     while (iter.hasNext()){
                         Topic topic = (Topic) iter.next();
-                        System.out.println(topic.getId() + ". " + topic.getName());
+                        System.out.println(topic.getId() + ". " + topic.getName() + "   " + Arrays.toString(topic.getKeywords().toArray()));
                     }
                 }
 

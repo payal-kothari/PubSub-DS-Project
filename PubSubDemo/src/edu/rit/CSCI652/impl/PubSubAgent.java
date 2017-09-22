@@ -7,6 +7,7 @@ import edu.rit.CSCI652.demo.Topic;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -33,7 +34,7 @@ public class PubSubAgent implements Publisher, Serializable{
         System.out.println("   **********  Topic list  **********  ");
         while (iter.hasNext()){
             Topic t = (Topic) iter.next();
-            System.out.println(t.getId() + ". "+ t.getName());
+            System.out.println(t.getId() + ". "+ t.getName() + "   " + Arrays.toString(t.getKeywords().toArray()));
         }
 
         Scanner scanner = new Scanner(System.in);
