@@ -18,18 +18,18 @@ public class SubscriberThreadHandler extends Thread{
     public void run(){
             try {
                 while (true){
-                    System.out.println("Thread started");
                     Socket socket = SubscriberNode.getNotificationListenSocket().accept();
-                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\taccepted a connection from  port :" + socket.getPort() );
                     objectInStream = new ObjectInputStream(socket.getInputStream());
                     //List<String> l = (List<String>) objectInStream.readObject();
                     List<Event> l = (List<Event>) objectInStream.readObject();
 
-                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tNew articles ");
+                    System.out.println("\n\n\n");
+                    System.out.println("*************************** New articles ****************************");
                     for(Event event : l){
-                        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t* Topic name - " + event.getTopic().getName() + " * Article name - " + event.getTitle());
+                        System.out.println("*  Topic name - " + event.getTopic().getName() + ", Article name - " + event.getTitle() );
                     }
 
+                    System.out.println("*********************************************************************");
                     objectInStream.close();
                     socket.close();
                 }

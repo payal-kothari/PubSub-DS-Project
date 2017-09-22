@@ -22,10 +22,8 @@ public class PubSubAgent implements Publisher, Serializable{
         ObjectInputStream objectInStream = new ObjectInputStream(publishSocket.getInputStream());
         int reconnectPort = objectInStream.readInt();
         Socket reconnectSocket = new Socket("localhost", reconnectPort);
-        System.out.println("Reconnected on port : " + reconnectSocket.getPort()); // gives remote m/c's port
         ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
         outObject.writeUTF("Publish");
-//        outObject.writeObject(event);
         outObject.flush();
 
         ObjectInputStream objectInStream2 = new ObjectInputStream(reconnectSocket.getInputStream());
@@ -40,11 +38,8 @@ public class PubSubAgent implements Publisher, Serializable{
         Scanner scanner = new Scanner(System.in);
         if(!topicList.isEmpty()){
             System.out.println("Please enter the topic number  ");
-
             int topicId = scanner.nextInt();
             scanner.nextLine();
-
-//            Topic selectedTopic = topicList.get(topicId);
             System.out.println("Please enter the title of the event: ");
             String eventTitle = scanner.nextLine();
             System.out.println("Please enter the content of the event: ");
@@ -55,9 +50,6 @@ public class PubSubAgent implements Publisher, Serializable{
             outObject.writeUTF(eventTitle);
             outObject.writeUTF(eventContent);
             outObject.flush();
-//            Event event = new Event(eventId, selectedTopic, title, content);
-//            outObject.writeObject(event);
-
         }else{
             System.out.println(" No topics available ");
         }
@@ -67,16 +59,14 @@ public class PubSubAgent implements Publisher, Serializable{
 	public void advertise(Topic newTopic) throws IOException {
 		// TODO Auto-generated method stub
 		Socket advertiserSocket = new Socket("localhost", 2000);
-        System.out.println("\nConnection request sent on public port  2000");
         ObjectInputStream objectInStream = new ObjectInputStream(advertiserSocket.getInputStream());
         int reconnectPort = objectInStream.readInt();
         Socket reconnectSocket = new Socket("localhost", reconnectPort);
-        System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
         ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
         outObject.writeUTF("Advertise");
         outObject.writeObject(newTopic);
         outObject.flush();
-		System.out.println("Topic successfully advetised");
+		System.out.println("Topic successfully advertised");
 	}
 
 

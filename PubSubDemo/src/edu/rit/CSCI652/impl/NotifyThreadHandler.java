@@ -20,7 +20,6 @@ public class NotifyThreadHandler extends Thread{
     private static InetAddress ip;
 
     public void run(){
-        System.out.println("in notify thread");
         while(true){
             Iterator iter = EventManager.getSubscribersToContact().entrySet().iterator();
             while (iter.hasNext()){

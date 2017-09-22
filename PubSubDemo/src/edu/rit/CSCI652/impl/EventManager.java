@@ -72,18 +72,11 @@ public class EventManager implements Serializable {
             busyPorts.add(nextFreePort);
             ServerSocket subServerSocket = new ServerSocket(nextFreePort);
             origSocket = eventManagerSocket.accept();
-            System.out.println("Connection established on public port : " + origSocket.getLocalPort());
             ObjectOutputStream outObject = new ObjectOutputStream(origSocket.getOutputStream());
             outObject.writeInt(nextFreePort);
             outObject.flush();
-            System.out.println("Reconnect port sent " + nextFreePort);
             origSocket.close();
             Socket subSocket = subServerSocket.accept();
-            System.out.println("Reconnected on port " + subSocket.getLocalPort());
-
-
-
-          //  socketList.add(subSocket);    // no need
             new ThreadHandler(subSocket, nextFreePort).start();
         }
 	}
