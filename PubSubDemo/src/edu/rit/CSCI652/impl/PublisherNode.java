@@ -34,41 +34,16 @@ public class PublisherNode {
             if(option == 1 ){                 // Advertising a new topic
                 topicId++;
                 keywords = new ArrayList<>();
-                System.out.println("Please enter keywords for the topic: ");
-                System.out.println("Enter 'Over' when you are done: ");
-                String keyword = scanner.nextLine();
-                while(!keyword.equals("Over") && !keyword.equals("over")){
-                    keywords.add(keyword);
-                    System.out.println("Please enter keywords for the topic: ");
-                    System.out.println("Enter 'Over' when you are done: ");
-                    keyword = scanner.nextLine();
-                }
                 System.out.println("Please enter name of the topic: ");
                 topicName = scanner.nextLine();
+                System.out.println("Please enter keywords(comma separated) for the topic: ");
+                String keyword = scanner.nextLine();
+                keywords = Arrays.asList(keyword.split(","));
                 createNewTopicAndAdvertise();
             }else if(option == 2){
                 eventId++;
 
                 new PubSubAgent().publish(eventId);
-//                if(allTopicsMap != null && !allTopicsMap.isEmpty()){
-//                    System.out.println("***********   Topic names   ***********");
-//                    for(Map.Entry<Integer, Topic> entry : allTopicsMap.entrySet()){
-//                        System.out.println(entry.getKey() + " " + entry.getValue().getName());
-//
-//                    }
-//                    System.out.println("Please select one option from the above list: ");
-//                    int topicIndexNum = scanner.nextInt();
-//                    scanner.nextLine();
-//                    Topic selectedTopic = allTopicsMap.get(topicIndexNum);
-//                    System.out.println("Please enter the title of the event: ");
-//                    String title = scanner.nextLine();
-//                    System.out.println("Please enter the content of the event: ");
-//                    String content = scanner.nextLine();
-//                    Event event = new Event(eventId, selectedTopic, title, content);
-//                    new PubSubAgent().publish(event);
-//                }else {
-//                    System.out.println("No topics available");
-//                }
             }
         }
     }
