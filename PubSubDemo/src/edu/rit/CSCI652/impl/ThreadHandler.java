@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by payalkothari on 9/11/17.
@@ -111,8 +112,27 @@ public class ThreadHandler extends Thread implements Serializable{
                 System.out.println("Subscribed topics list sent");
 
             }else if(input.equals("Un-subscriber")){
-                String topicToUnsubscribe = objectInStream.readUTF();
                 InetAddress remoteInetAddress = socket.getInetAddress();
+
+                List<Topic> listToSend = new ArrayList<>();
+                Iterator it = EventManager.getSubscriberMap().entrySet().iterator();
+                while (it.hasNext()){
+                    Map.Entry pair = (Map.Entry)it.next();
+                    List<SubscriberDetails> list = (List<SubscriberDetails>) pair.getValue();
+                    Iterator iter2 = list.iterator();
+                    if(iter2.hasNext()){
+                        SubscriberDetails sub = (SubscriberDetails) iter2.next();
+                        if(sub.getIpAddress().equals(remoteInetAddress)){
+                            listToSend.add((Topic) pair.getKey());
+                        }
+                    }
+                }
+
+                ObjectOutputStream outObject = new ObjectOutputStream(socket.getOutputStream());
+                outObject.writeObject(listToSend);
+                outObject.flush();
+
+                String topicToUnsubscribe = objectInStream.readUTF();
 
                 List<SubscriberDetails> subscriberList = null;
                 for(Topic t : EventManager.getSubscriberMap().keySet()){
@@ -146,6 +166,27 @@ public class ThreadHandler extends Thread implements Serializable{
                             }
                         }
                 }
+            }else if(input.equals("Subscribed list")){
+                InetAddress remoteInetAddress = socket.getInetAddress();
+
+                List<Topic> listToSend = new ArrayList<>();
+                Iterator it = EventManager.getSubscriberMap().entrySet().iterator();
+                while (it.hasNext()){
+                    Map.Entry pair = (Map.Entry)it.next();
+                    List<SubscriberDetails> list = (List<SubscriberDetails>) pair.getValue();
+                    Iterator iter2 = list.iterator();
+                    if(iter2.hasNext()){
+                        SubscriberDetails sub = (SubscriberDetails) iter2.next();
+                        if(sub.getIpAddress().equals(remoteInetAddress)){
+                            listToSend.add((Topic) pair.getKey());
+                        }
+                    }
+                }
+
+                ObjectOutputStream outObject = new ObjectOutputStream(socket.getOutputStream());
+                outObject.writeObject(listToSend);
+                outObject.flush();
+
             }
         }catch (IOException e){
 

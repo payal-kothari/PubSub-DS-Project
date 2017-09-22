@@ -1,5 +1,6 @@
 package edu.rit.CSCI652.impl;
 
+import edu.rit.CSCI652.demo.Event;
 import edu.rit.CSCI652.demo.Subscriber;
 import edu.rit.CSCI652.demo.Topic;
 
@@ -69,19 +70,12 @@ public class SubscriberNode implements Subscriber, Serializable {
 
                 if(!topicList.isEmpty()){
                     System.out.println("   **********  Topic list  **********  ");
-                    boolean subscribedAll = true;
                     while (iter.hasNext()){
                         Topic t = (Topic) iter.next();
-                        if(!subscribedTopics.isEmpty() && !subscribedTopics.contains(t.getName())){
-                            subscribedAll = false;
                             System.out.println(t.getId() + ". "+ t.getName());
-                        }else if(subscribedTopics.isEmpty()){
-                            subscribedAll = false;
-                            System.out.println(t.getId() + ". "+ t.getName());
-                        }
                     }
 
-                    if(!topicList.isEmpty() && subscribedAll == false){
+                    if(!topicList.isEmpty()){
                         System.out.println("Please enter the topic number you want to subscribe to ");
 
                         int topicId = scanner.nextInt();
@@ -96,14 +90,10 @@ public class SubscriberNode implements Subscriber, Serializable {
                                 subscribedTopics.add(t.getName());
                             }
                         }
-                    }else if(subscribedAll == true){
-                        System.out.println(" you have subscribed all topics");
                     }
                 }else {
                     System.out.println("No topics available");
                 }
-
-
 
             }else if(option == 2){
                 Socket subscriberSocket = new Socket("localhost", 2000);
@@ -144,19 +134,27 @@ public class SubscriberNode implements Subscriber, Serializable {
                 outObject.flush();
 
                 System.out.println(" ********  Subscribed topics ********");
-                Iterator iter = subscribedTopics.iterator();
+                ObjectInputStream objectInStream2 = new ObjectInputStream(reconnectSocket.getInputStream());
+                List<Topic>  topicList = ( List<Topic> ) objectInStream2.readObject();
+                Iterator iter = topicList.iterator();
                 int index = 0;
                 while (iter.hasNext()){
-                    System.out.println(++index + ". " + iter.next());
+                    Topic topic = (Topic) iter.next();
+                    System.out.println(topic.getId() + ". " + topic.getName());
                 }
 
-                if(!subscribedTopics.isEmpty()){
+                if(!topicList.isEmpty()){
                     System.out.println("Please enter topic number you want to un-subscribe");
                     int unSubscribeId = scanner.nextInt();
                     scanner.nextLine();
-
-                    String topicToUnsubscribe = subscribedTopics.get(--unSubscribeId);
-                    subscribedTopics.remove(unSubscribeId);
+                    String topicToUnsubscribe = null;
+                    Iterator it = topicList.iterator();
+                    while (it.hasNext()){
+                        Topic topic = (Topic) it.next();
+                        if(topic.getId() == unSubscribeId){
+                            topicToUnsubscribe = topic.getName();
+                        }
+                    }
 
                     outObject.writeUTF(topicToUnsubscribe);
                     outObject.flush();
@@ -181,14 +179,32 @@ public class SubscriberNode implements Subscriber, Serializable {
                     System.out.println(" You have not subscribed to any topics ");
                 }
             }else if(option == 5){
-                int index = 0;
-                if(!subscribedTopics.isEmpty()){
-                    System.out.println("\n ********  You have subscribed to the following topics ********");
-                    for(String topic : subscribedTopics){
-                        System.out.println(++index + ". "  +topic);
+
+                Socket subscriberSocket = new Socket("localhost", 2000);
+                System.out.println("\n Connection request sent on public port  2000");
+                ObjectInputStream objectInStream = new ObjectInputStream(subscriberSocket.getInputStream());
+                int reconnectPort = objectInStream.readInt();
+                Socket reconnectSocket = new Socket("localhost", reconnectPort);
+                System.out.println("Reconnected on port " + reconnectSocket.getPort() + " : " + reconnectSocket.isConnected()) ; // gives remote m/c's port
+
+                ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
+                outObject.writeUTF("Subscribed list");
+                outObject.flush();
+
+
+                ObjectInputStream objectInStream2 = new ObjectInputStream(reconnectSocket.getInputStream());
+                List<Topic>  topicList = ( List<Topic> ) objectInStream2.readObject();
+                Iterator iter = topicList.iterator();
+                if(!topicList.isEmpty()){
+                    System.out.println(" ********** Subscribed Topics **********");
+                    while (iter.hasNext()){
+                        Topic topic = (Topic) iter.next();
+                        System.out.println(topic.getId() + ". " + topic.getName());
                     }
-                }else {
-                    System.out.println("\n ********  You have not subscribed to any topics");
+                }
+
+                if(topicList.isEmpty()){
+                    System.out.println("You have not subscribed to any topics");
                 }
 
             }
