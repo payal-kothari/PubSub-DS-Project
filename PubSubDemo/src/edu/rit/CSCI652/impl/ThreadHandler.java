@@ -23,21 +23,24 @@ public class ThreadHandler extends Thread implements Serializable{
     private static Socket socket;
     private static EventManager em = null;
     private static int currentPort;
+    private static EventManager threadSyncObject;
 
-    public ThreadHandler(Socket socket, int port) {
+    public ThreadHandler(Socket socket, int port,EventManager threadSyncObject) {
         this.em = new EventManager();
         this.socket = socket;
         this.currentPort = port;
+        this.threadSyncObject = threadSyncObject;
     }
 
     public void run() {
-        try{
+        synchronized (threadSyncObject){
+        try {
             ObjectInputStream objectInStream = new ObjectInputStream(socket.getInputStream());
             String input = objectInStream.readUTF();
-            if(input.equals("Advertise")){
+            if (input.equals("Advertise")) {
                 Topic topic = (Topic) objectInStream.readObject();
                 em.addTopic(topic);
-            }else if(input.equals("Publish")){
+            } else if (input.equals("Publish")) {
 
                 ObjectOutputStream outObject = new ObjectOutputStream(socket.getOutputStream());
                 outObject.writeObject(EventManager.getTopicList());
@@ -49,41 +52,41 @@ public class ThreadHandler extends Thread implements Serializable{
 
                 Topic topic = null;
 
-                for(Topic t : EventManager.getTopicList()){
-                    if(t.getId() == topicId){
+                for (Topic t : EventManager.getTopicList()) {
+                    if (t.getId() == topicId) {
                         topic = t;
                     }
                 }
 
                 Event article = new Event(eventId, topic, eventTitle, eventContent);
                 EventManager.getEventMap().put(article.getId(), article);
-                System.out.println("Article " +  "'" + article.getTitle() +"'"+ " published under topic name - " + "'" + article.getTopic().getName() + "'");
+                System.out.println("Article " + "'" + article.getTitle() + "'" + " published under topic name - " + "'" + article.getTopic().getName() + "'");
                 List<SubscriberDetails> list = EventManager.getSubscriberMap().get(article.getTopic());
 
-                if(list != null){
+                if (list != null) {
                     addAddresses(list, article);
                 }
 
-            }else if(input.equals("Subscriber")){
+            } else if (input.equals("Subscriber")) {
                 ObjectOutputStream outObject = new ObjectOutputStream(socket.getOutputStream());
                 outObject.writeObject(EventManager.getTopicList());
                 outObject.flush();
 
-                if(!EventManager.getTopicList().isEmpty()){
+                if (!EventManager.getTopicList().isEmpty()) {
                     int topicIdToSubscribe = objectInStream.read();
                     System.out.println("Subscribed to topic - '" + EventManager.getTopicList().get(--topicIdToSubscribe).getName() + "'");
                     SubscriberDetails subscriber = new SubscriberDetails(socket.getInetAddress(), 8000);  // 8000 for all subscribers
                     List subscriberList = EventManager.getSubscriberMap().get(EventManager.getTopicList().get(topicIdToSubscribe));
                     subscriberList.add(subscriber);
-                                }
-            }else if(input.equals("Subscribe by keyword")){
+                }
+            } else if (input.equals("Subscribe by keyword")) {
 
                 List<String> subscribedTopics = new ArrayList<>();
                 String keyword = objectInStream.readUTF();
                 SubscriberDetails subscriber = new SubscriberDetails(socket.getInetAddress(), 8000);  // 8000 for all subscribers
-                for(Topic topic : EventManager.getSubscriberMap().keySet()){
+                for (Topic topic : EventManager.getSubscriberMap().keySet()) {
                     List<String> keywordList = topic.getKeywords();
-                    if(keywordList.contains(keyword)){
+                    if (keywordList.contains(keyword)) {
                         List subscriberList = EventManager.getSubscriberMap().get(topic);
                         subscriberList.add(subscriber);
                         subscribedTopics.add(topic.getName());
@@ -93,18 +96,18 @@ public class ThreadHandler extends Thread implements Serializable{
                 ObjectOutputStream outObject = new ObjectOutputStream(socket.getOutputStream());
                 outObject.writeObject(subscribedTopics);
                 outObject.flush();
-            }else if(input.equals("Un-subscriber")){
+            } else if (input.equals("Un-subscriber")) {
                 InetAddress remoteInetAddress = socket.getInetAddress();
 
                 List<Topic> listToSend = new ArrayList<>();
                 Iterator it = EventManager.getSubscriberMap().entrySet().iterator();
-                while (it.hasNext()){
-                    Map.Entry pair = (Map.Entry)it.next();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry) it.next();
                     List<SubscriberDetails> list = (List<SubscriberDetails>) pair.getValue();
                     Iterator iter2 = list.iterator();
-                    if(iter2.hasNext()){
+                    if (iter2.hasNext()) {
                         SubscriberDetails sub = (SubscriberDetails) iter2.next();
-                        if(sub.getIpAddress().equals(remoteInetAddress)){
+                        if (sub.getIpAddress().equals(remoteInetAddress)) {
                             listToSend.add((Topic) pair.getKey());
                         }
                     }
@@ -117,46 +120,46 @@ public class ThreadHandler extends Thread implements Serializable{
                 String topicToUnsubscribe = objectInStream.readUTF();
 
                 List<SubscriberDetails> subscriberList = null;
-                for(Topic t : EventManager.getSubscriberMap().keySet()){
-                    if(t.getName().equals(topicToUnsubscribe)){
+                for (Topic t : EventManager.getSubscriberMap().keySet()) {
+                    if (t.getName().equals(topicToUnsubscribe)) {
                         subscriberList = EventManager.getSubscriberMap().get(t);
                         Iterator iter = subscriberList.iterator();
-                        while (iter.hasNext()){
+                        while (iter.hasNext()) {
                             SubscriberDetails sub = (SubscriberDetails) iter.next();
-                            if(sub.getIpAddress().equals(remoteInetAddress)){
+                            if (sub.getIpAddress().equals(remoteInetAddress)) {
                                 subscriberList.remove(sub);
                                 break;
                             }
                         }
                     }
                 }
-            }else if(input.equals("Un-subscriber_All")){
+            } else if (input.equals("Un-subscriber_All")) {
 
                 InetAddress remoteInetAddress = socket.getInetAddress();
 
                 List<SubscriberDetails> subscriberList = null;
-                for(Topic t : EventManager.getSubscriberMap().keySet()){
-                        subscriberList = EventManager.getSubscriberMap().get(t);  // get value from Map
-                        Iterator iter = subscriberList.iterator();          // for List - you can use iterator or for-each loop
-                        while (iter.hasNext()){
-                            SubscriberDetails sub = (SubscriberDetails) iter.next();
-                            if(sub.getIpAddress().equals(remoteInetAddress)){
-                                iter.remove();          // to avoid concurrent modification exception
-                            }
+                for (Topic t : EventManager.getSubscriberMap().keySet()) {
+                    subscriberList = EventManager.getSubscriberMap().get(t);  // get value from Map
+                    Iterator iter = subscriberList.iterator();          // for List - you can use iterator or for-each loop
+                    while (iter.hasNext()) {
+                        SubscriberDetails sub = (SubscriberDetails) iter.next();
+                        if (sub.getIpAddress().equals(remoteInetAddress)) {
+                            iter.remove();          // to avoid concurrent modification exception
                         }
+                    }
                 }
-            }else if(input.equals("Subscribed list")){
+            } else if (input.equals("Subscribed list")) {
                 InetAddress remoteInetAddress = socket.getInetAddress();
 
                 List<Topic> listToSend = new ArrayList<>();
                 Iterator it = EventManager.getSubscriberMap().entrySet().iterator();
-                while (it.hasNext()){
-                    Map.Entry pair = (Map.Entry)it.next();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry) it.next();
                     List<SubscriberDetails> list = (List<SubscriberDetails>) pair.getValue();
                     Iterator iter2 = list.iterator();
-                    if(iter2.hasNext()){
+                    if (iter2.hasNext()) {
                         SubscriberDetails sub = (SubscriberDetails) iter2.next();
-                        if(sub.getIpAddress().equals(remoteInetAddress)){
+                        if (sub.getIpAddress().equals(remoteInetAddress)) {
                             listToSend.add((Topic) pair.getKey());
                         }
                     }
@@ -167,13 +170,11 @@ public class ThreadHandler extends Thread implements Serializable{
                 outObject.flush();
 
             }
-        }catch (IOException e){
+        } catch (IOException e) {
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-
-        finally {
+        } finally {
             try {
                 socket.close();
                 EventManager.getBusyPorts().remove(currentPort);
@@ -181,6 +182,7 @@ public class ThreadHandler extends Thread implements Serializable{
                 e.printStackTrace();
             }
         }
+     }
     }
 
     /*

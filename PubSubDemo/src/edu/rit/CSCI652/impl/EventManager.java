@@ -56,7 +56,7 @@ public class EventManager implements Serializable {
     /*
 	 * Start the repo service
 	 */
-	private void startService() throws IOException, ClassNotFoundException {
+	private void startService(EventManager threadSyncObject) throws IOException, ClassNotFoundException {
 		eventManagerSocket = new ServerSocket(2000);
 		busyPorts.add(2000);
         new NotifyThreadHandler().start();    // new thread to send out notifications
@@ -72,7 +72,7 @@ public class EventManager implements Serializable {
             outObject.flush();
             origSocket.close();
             Socket subSocket = subServerSocket.accept();
-            new ThreadHandler(subSocket, nextFreePort).start();  // new thread for new connection
+            new ThreadHandler(subSocket, nextFreePort, threadSyncObject).start();  // new thread for new connection
         }
 	}
 
@@ -106,6 +106,7 @@ public class EventManager implements Serializable {
     }
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		new EventManager().startService();
+        EventManager threadSyncObject = new EventManager();
+		new EventManager().startService(threadSyncObject);
 	}
 }
