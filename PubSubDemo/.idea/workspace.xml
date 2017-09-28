@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8c8d5640-3fa8-4ec3-a438-96d318ca6205" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/EventManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/NotifyThreadHandler.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/NotifyThreadHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/PubSubAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/SubscriberNode.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/impl/SubscriberNode.java" />
-    </list>
+    <list default="true" id="8c8d5640-3fa8-4ec3-a438-96d318ca6205" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
