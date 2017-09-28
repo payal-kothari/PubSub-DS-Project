@@ -25,6 +25,7 @@ public class ThreadHandler extends Thread implements Serializable{
     private static int currentPort;
     private static EventManager threadSyncObject;
 
+
     public ThreadHandler(Socket socket, int port,EventManager threadSyncObject) {
         this.em = new EventManager();
         this.socket = socket;
@@ -39,6 +40,9 @@ public class ThreadHandler extends Thread implements Serializable{
             String input = objectInStream.readUTF();
             if (input.equals("Advertise")) {
                 Topic topic = (Topic) objectInStream.readObject();
+                int index = em.getTopidIndex();
+                em.setTopidIndex(++index);
+                topic.setId(em.getTopidIndex());
                 em.addTopic(topic);
             } else if (input.equals("Publish")) {
 

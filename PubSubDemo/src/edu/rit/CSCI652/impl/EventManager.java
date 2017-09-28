@@ -30,6 +30,15 @@ public class EventManager implements Serializable {
     private static HashSet<Integer> busyPorts = new HashSet<>();
     private static HashMap<Topic, List<SubscriberDetails>> subscriberMap = new HashMap<>();
     private static Socket origSocket;
+    private static int topidIndex;
+
+    public int getTopidIndex() {
+        return topidIndex;
+    }
+
+    public void setTopidIndex(int topidIndex) {
+        this.topidIndex = topidIndex;
+    }
 
     public static HashMap<InetAddress, List<Event>> getSubscribersToContact() {
         return subscribersToContact;

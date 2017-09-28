@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Topic implements Serializable{
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	private int id;
 	private List<String> keywords;
 	private String name;
