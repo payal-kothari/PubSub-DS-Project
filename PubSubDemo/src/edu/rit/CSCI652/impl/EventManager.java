@@ -13,13 +13,6 @@ import java.net.Socket;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-// Test cases
-
-// 1) add a topic and advertise
-// 2) one or more subscriber subscribe
-// 3) time de-coupling : bring down one og the subscriber , use a publisher to publish , and you must notify a subscriber when it comes online
-// comments
-// create multiple dockers, check they can talk to each other
 
 public class EventManager implements Serializable {
 

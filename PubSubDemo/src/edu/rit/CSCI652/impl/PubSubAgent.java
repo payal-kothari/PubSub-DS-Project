@@ -6,6 +6,7 @@ import edu.rit.CSCI652.demo.Subscriber;
 import edu.rit.CSCI652.demo.Topic;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -14,13 +15,14 @@ import java.util.Scanner;
 
 public class PubSubAgent implements Publisher, Serializable{
 
+    private String eventManagerIp = "129.21.22.196";   // glados ip
 
 	@Override
 	public void publish(int eventId) throws IOException, ClassNotFoundException {
-        Socket publishSocket = new Socket("localhost", 2000);
+        Socket publishSocket = new Socket(eventManagerIp, 2000);
         ObjectInputStream objectInStream = new ObjectInputStream(publishSocket.getInputStream());
         int reconnectPort = objectInStream.readInt();
-        Socket reconnectSocket = new Socket("localhost", reconnectPort);
+        Socket reconnectSocket = new Socket(eventManagerIp, reconnectPort);
         ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
         outObject.writeUTF("Publish");
         outObject.flush();
@@ -56,10 +58,10 @@ public class PubSubAgent implements Publisher, Serializable{
 
 	@Override
 	public void advertise(Topic newTopic) throws IOException {
-		Socket advertiserSocket = new Socket("localhost", 2000);
+		Socket advertiserSocket = new Socket(eventManagerIp, 2000);
         ObjectInputStream objectInStream = new ObjectInputStream(advertiserSocket.getInputStream());
         int reconnectPort = objectInStream.readInt();
-        Socket reconnectSocket = new Socket("localhost", reconnectPort);
+        Socket reconnectSocket = new Socket(eventManagerIp, reconnectPort);
         ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
         outObject.writeUTF("Advertise");
         outObject.writeObject(newTopic);

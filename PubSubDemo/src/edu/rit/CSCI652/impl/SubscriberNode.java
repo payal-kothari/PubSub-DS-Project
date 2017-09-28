@@ -25,6 +25,8 @@ public class SubscriberNode implements Subscriber, Serializable {
 
     private static ServerSocket notificationListenSocket;
 
+    private static String eventManagerIp = "129.21.22.196"; // glados ip
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         notificationListenSocket  = new ServerSocket(8000);
@@ -48,10 +50,10 @@ public class SubscriberNode implements Subscriber, Serializable {
             int option = scanner.nextInt();
             scanner.nextLine();                 // need this after reading nextInt()
             if(option == 1 ){                   // subscribe
-                Socket subscriberSocket = new Socket("localhost", 2000);
+                Socket subscriberSocket = new Socket(eventManagerIp, 2000);
                 ObjectInputStream objectInStream = new ObjectInputStream(subscriberSocket.getInputStream());
                 int reconnectPort = objectInStream.readInt();
-                Socket reconnectSocket = new Socket("localhost", reconnectPort);
+                Socket reconnectSocket = new Socket(eventManagerIp, reconnectPort);
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Subscriber");
                 outObject.flush();
@@ -88,11 +90,11 @@ public class SubscriberNode implements Subscriber, Serializable {
                 }
 
             }else if(option == 2){
-                Socket subscriberSocket = new Socket("localhost", 2000);
+                Socket subscriberSocket = new Socket(eventManagerIp, 2000);
                 System.out.println("\n Connection request sent on public port  2000");
                 ObjectInputStream objectInStream = new ObjectInputStream(subscriberSocket.getInputStream());
                 int reconnectPort = objectInStream.readInt();
-                Socket reconnectSocket = new Socket("localhost", reconnectPort);
+                Socket reconnectSocket = new Socket(eventManagerIp, reconnectPort);
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Subscribe by keyword");
                 outObject.flush();
@@ -115,10 +117,10 @@ public class SubscriberNode implements Subscriber, Serializable {
                     }
                 }
             }else if(option == 3){
-                Socket subscriberSocket = new Socket("localhost", 2000);
+                Socket subscriberSocket = new Socket(eventManagerIp, 2000);
                 ObjectInputStream objectInStream = new ObjectInputStream(subscriberSocket.getInputStream());
                 int reconnectPort = objectInStream.readInt();
-                Socket reconnectSocket = new Socket("localhost", reconnectPort);
+                Socket reconnectSocket = new Socket(eventManagerIp, reconnectPort);
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Un-subscriber");
                 outObject.flush();
@@ -152,10 +154,10 @@ public class SubscriberNode implements Subscriber, Serializable {
                     System.out.println("\n You have not subscribed to any topics ");
                 }
             }else if(option == 4){
-                Socket subscriberSocket = new Socket("localhost", 2000);
+                Socket subscriberSocket = new Socket(eventManagerIp, 2000);
                 ObjectInputStream objectInStream = new ObjectInputStream(subscriberSocket.getInputStream());
                 int reconnectPort = objectInStream.readInt();
-                Socket reconnectSocket = new Socket("localhost", reconnectPort);
+                Socket reconnectSocket = new Socket(eventManagerIp, reconnectPort);
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Un-subscriber_All");
                 outObject.flush();
@@ -167,10 +169,10 @@ public class SubscriberNode implements Subscriber, Serializable {
                 }
             }else if(option == 5){
 
-                Socket subscriberSocket = new Socket("localhost", 2000);
+                Socket subscriberSocket = new Socket(eventManagerIp, 2000);
                 ObjectInputStream objectInStream = new ObjectInputStream(subscriberSocket.getInputStream());
                 int reconnectPort = objectInStream.readInt();
-                Socket reconnectSocket = new Socket("localhost", reconnectPort);
+                Socket reconnectSocket = new Socket(eventManagerIp, reconnectPort);
                 ObjectOutputStream outObject = new ObjectOutputStream(reconnectSocket.getOutputStream());
                 outObject.writeUTF("Subscribed list");
                 outObject.flush();

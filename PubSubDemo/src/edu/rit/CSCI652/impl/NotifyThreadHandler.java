@@ -26,15 +26,8 @@ public class NotifyThreadHandler extends Thread{
                 Map.Entry pair = (Map.Entry)iter.next();
                 ip = (InetAddress) pair.getKey();
                 eventList = (List<Event>) pair.getValue();
-//                eventList.iterator();
                 try(Socket s = new Socket(ip, 8000)) {
                     if(s.isConnected()){
-//                        List<Event> l = new ArrayList<>();
-//                        Iterator it = eventList.iterator();
-//                        while (it.hasNext()){
-//                            Event e = (Event) it.next();
-//                            l.add(e);
-//                        }
 
                         try {
                             ObjectOutputStream outS = new ObjectOutputStream(s.getOutputStream());
