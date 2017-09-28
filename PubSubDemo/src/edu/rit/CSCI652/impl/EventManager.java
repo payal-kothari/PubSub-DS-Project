@@ -11,6 +11,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 // Test cases
 
@@ -40,11 +41,11 @@ public class EventManager implements Serializable {
         this.topidIndex = topidIndex;
     }
 
-    public static HashMap<InetAddress, List<Event>> getSubscribersToContact() {
+    public static ConcurrentHashMap<InetAddress, List<Event>> getSubscribersToContact() {
         return subscribersToContact;
     }
 
-    private static HashMap<InetAddress, List<Event>> subscribersToContact = new HashMap<>();
+    private static ConcurrentHashMap<InetAddress, List<Event>> subscribersToContact = new ConcurrentHashMap<>();
 
     public static List<Topic> getTopicList() {
         return topicList;
