@@ -7,10 +7,10 @@
    * javac edu/rit/CSCI652/impl/*.java
    * java edu.rit.CSCI652.impl.EventManager
 
-3. Run PublisherNode on any RIT's cs machine with following the command,
+3. Run PublisherNode on any RIT's CS machine with following the command,
    * java edu.rit.CSCI652.impl.PublisherNode
 
-4. Run SubscriberNode on any RIT's cs machine with following the command,
+4. Run SubscriberNode on any RIT's CS machine with following the command,
    * java edu.rit.CSCI652.impl.SubscriberNode
 
 ## Test case 1:
