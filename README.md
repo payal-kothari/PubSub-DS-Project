@@ -29,9 +29,9 @@
   
 
 ## Test case 2 : 
-    1. Subscribe for a topic.
-    2. Close the terminal of this SubscriberNode. 
-    3. Publish an event under the subscribed topic name.
-    4. Again run the SubscriberNode(on the same machine, so the IP address will not change). You will see the notification that an 
+   1. Subscribe for a topic.
+   2. Close the terminal of this SubscriberNode. 
+   3. Publish an event under the subscribed topic name.
+   4. Again run the SubscriberNode(on the same machine, so the IP address will not change). You will see the notification that an 
       article is published under a topic you had subscribed to.
       
